@@ -13,7 +13,7 @@ import { FloatingPetals } from "./components/FloatingPetals";
 import { CoupleSection } from "./components/CoupleSection";
 import { DuaSection } from "./components/DuaSection";
 import { EventSchedule } from "./components/EventSchedule";
-import { BlessingsWall } from "./components/BlessingsWall";
+import { Gallery } from "./components/Gallery";
 
 const MUSIC_URLS = ["/music/wedding.mp3"];
 
@@ -105,6 +105,7 @@ export default function App() {
 
           <HeroSection />
           <DuaSection />
+          <Gallery />
           <CountdownTimer />
           <CoupleSection />
           <EventSchedule />

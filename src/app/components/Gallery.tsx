@@ -5,35 +5,35 @@ import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 const photos = [
   {
-    src: "https://images.unsplash.com/photo-1758810742200-b5593d7d5a1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwZmxvd2VycyUyMGRlY29yYXRpb24lMjBlbGVnYW50JTIwZ29sZHxlbnwxfHx8fDE3NzM4MTIyMjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Wedding Flowers",
-    span: "col-span-2 row-span-2",
+    src: "/images/home.jpeg",
+    alt: "Wedding Home",
+    span: "col-span-3 row-span-2",
   },
-  {
-    src: "https://images.unsplash.com/photo-1769230387364-8b0c2b63e18b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwdmVudWUlMjBlbGVnYW50JTIwbmlnaHQlMjBsaWdodHN8ZW58MXx8fHwxNzczODEyMjIxfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Wedding Venue",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1768341395921-93a8444e007e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwcmluZ3MlMjBnb2xkJTIwY2xvc2UlMjB1cCUyMHNpbGt8ZW58MXx8fHwxNzczODEyMjIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Wedding Rings",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1764641405208-8f4116556901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwbWVobmRpJTIwaGVubmElMjBoYW5kcyUyMGJlYXV0aWZ1bHxlbnwxfHx8fDE3NzM4MTIyMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Mehndi Art",
-    span: "col-span-1 row-span-2",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwY2FrZSUyMGVsZWdhbnQlMjBsdXh1cnklMjBnb2xkJTIwd2hpdGV8ZW58MXx8fHwxNzczODEyMjIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Wedding Cake",
-    span: "col-span-1 row-span-1",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1773370812364-7d0e882e0b4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwdGFibGUlMjBzZXR0aW5nJTIwZWxlZ2FudCUyMGNhbmRsZXMlMjBmbG9yYWx8ZW58MXx8fHwxNzczODEyMjIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
-    alt: "Table Setting",
-    span: "col-span-2 row-span-1",
-  },
+  // {
+  //   src: "https://images.unsplash.com/photo-1769230387364-8b0c2b63e18b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwdmVudWUlMjBlbGVnYW50JTIwbmlnaHQlMjBsaWdodHN8ZW58MXx8fHwxNzczODEyMjIxfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  //   alt: "Wedding Venue",
+  //   span: "col-span-1 row-span-1",
+  // },
+  // {
+  //   src: "https://images.unsplash.com/photo-1768341395921-93a8444e007e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwcmluZ3MlMjBnb2xkJTIwY2xvc2UlMjB1cCUyMHNpbGt8ZW58MXx8fHwxNzczODEyMjIyfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  //   alt: "Wedding Rings",
+  //   span: "col-span-1 row-span-1",
+  // },
+  // {
+  //   src: "https://images.unsplash.com/photo-1764641405208-8f4116556901?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwbWVobmRpJTIwaGVubmElMjBoYW5kcyUyMGJlYXV0aWZ1bHxlbnwxfHx8fDE3NzM4MTIyMjJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+  //   alt: "Mehndi Art",
+  //   span: "col-span-1 row-span-2",
+  // },
+  // {
+  //   src: "https://images.unsplash.com/photo-1769812343875-c40f9ec7f846?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwY2FrZSUyMGVsZWdhbnQlMjBsdXh1cnklMjBnb2xkJTIwd2hpdGV8ZW58MXx8fHwxNzczODEyMjIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  //   alt: "Wedding Cake",
+  //   span: "col-span-1 row-span-1",
+  // },
+  // {
+  //   src: "https://images.unsplash.com/photo-1773370812364-7d0e882e0b4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3ZWRkaW5nJTIwdGFibGUlMjBzZXR0aW5nJTIwZWxlZ2FudCUyMGNhbmRsZXMlMjBmbG9yYWx8ZW58MXx8fHwxNzczODEyMjIzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+  //   alt: "Table Setting",
+  //   span: "col-span-2 row-span-1",
+  // },
 ];
 
 export function Gallery() {
@@ -44,7 +44,9 @@ export function Gallery() {
   const openLightbox = (idx: number) => setLightbox(idx);
   const closeLightbox = () => setLightbox(null);
   const prev = () =>
-    setLightbox((c) => (c !== null ? (c - 1 + photos.length) % photos.length : null));
+    setLightbox((c) =>
+      c !== null ? (c - 1 + photos.length) % photos.length : null,
+    );
   const next = () =>
     setLightbox((c) => (c !== null ? (c + 1) % photos.length : null));
 
@@ -52,9 +54,10 @@ export function Gallery() {
     <>
       <section
         ref={ref}
-        className="py-28 px-6"
+        className="mt-10 px-6"
         style={{
-          background: "linear-gradient(180deg, #fdf6f0 0%, #f8ede0 50%, #fdf6f0 100%)",
+          background:
+            "linear-gradient(180deg, #fdf6f0 0%, #f8ede0 50%, #fdf6f0 100%)",
         }}
       >
         <motion.div
@@ -65,7 +68,7 @@ export function Gallery() {
         >
           {/* Header */}
           <div className="text-center mb-16">
-            <p
+            {/* <p
               className="mb-3"
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
@@ -76,7 +79,7 @@ export function Gallery() {
               }}
             >
               Moments to Cherish
-            </p>
+            </p> */}
             <h2
               style={{
                 fontFamily: "'Playfair Display', serif",
@@ -113,7 +116,8 @@ export function Gallery() {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-end p-4"
                   style={{
-                    background: "linear-gradient(180deg, transparent 40%, rgba(26,20,16,0.7) 100%)",
+                    background:
+                      "linear-gradient(180deg, transparent 40%, rgba(26,20,16,0.7) 100%)",
                   }}
                 >
                   <p
@@ -128,9 +132,7 @@ export function Gallery() {
                   </p>
                 </div>
                 {/* Gold border on hover */}
-                <div
-                  className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#c9a87c]/40 transition-all duration-500"
-                />
+                <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-[#c9a87c]/40 transition-all duration-500" />
               </motion.div>
             ))}
           </div>
@@ -176,21 +178,30 @@ export function Gallery() {
 
             {/* Controls */}
             <button
-              onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                closeLightbox();
+              }}
               className="absolute top-6 right-6 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               style={{ background: "rgba(201,168,124,0.2)", color: "#c9a87c" }}
             >
               <X size={20} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); prev(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
               className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               style={{ background: "rgba(201,168,124,0.2)", color: "#c9a87c" }}
             >
               <ChevronLeft size={20} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); next(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
               className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center transition-colors"
               style={{ background: "rgba(201,168,124,0.2)", color: "#c9a87c" }}
             >

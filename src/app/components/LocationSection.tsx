@@ -5,7 +5,10 @@ const MAP_URL = "https://maps.app.goo.gl/18VoqZZRUEVZPPGt8?g_st=aw";
 
 export function LocationSection() {
   return (
-    <section className="py-24 px-6" style={{ background: "linear-gradient(180deg, #f5e6d8, #fdf6f0)" }}>
+    <section
+      className="py-24 px-6"
+      style={{ background: "linear-gradient(180deg, #f5e6d8, #fdf6f0)" }}
+    >
       <motion.div
         className="max-w-lg mx-auto text-center"
         initial={{ opacity: 0, y: 40 }}
@@ -13,12 +16,40 @@ export function LocationSection() {
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
       >
-        <p style={{ fontFamily: "'Cormorant Garamond', serif", color: "#8b6d50", fontSize: "14px", letterSpacing: "5px", textTransform: "uppercase" }} className="mb-4">
+        <p
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            color: "#8b6d50",
+            fontSize: "14px",
+            letterSpacing: "5px",
+            textTransform: "uppercase",
+          }}
+          className="mb-4"
+        >
           Join Us At
         </p>
-        <h2 style={{ fontFamily: "'Playfair Display', serif", color: "#3d2e1f", fontSize: "clamp(1.5rem, 4vw, 2.2rem)" }} className="mb-10">
+        <h2
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            color: "#3d2e1f",
+            fontSize: "clamp(1.5rem, 4vw, 2.2rem)",
+          }}
+          className="mb-1"
+        >
           Venue Location
         </h2>
+
+        <p
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            color: "#5a4a3a",
+            fontSize: "1.1rem",
+            lineHeight: 1.8,
+          }}
+          className="mb-2"
+        >
+          Le Aura Grand, Pine Avenue Square, Lahore
+        </p>
 
         <div
           className="rounded-2xl p-8 sm:p-10 mx-auto"
@@ -28,12 +59,24 @@ export function LocationSection() {
             boxShadow: "0 10px 40px rgba(139, 109, 80, 0.08)",
           }}
         >
-          <div className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center" style={{ background: "rgba(201, 168, 124, 0.15)" }}>
+          <div
+            className="w-16 h-16 rounded-full mx-auto mb-6 flex items-center justify-center"
+            style={{ background: "rgba(201, 168, 124, 0.15)" }}
+          >
             <MapPin size={28} style={{ color: "#8b6d50" }} />
           </div>
 
-          <p style={{ fontFamily: "'Cormorant Garamond', serif", color: "#5a4a3a", fontSize: "1.1rem", lineHeight: 1.8 }} className="mb-8">
-            We can't wait to celebrate with you at our chosen venue. Click below for directions.
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              color: "#5a4a3a",
+              fontSize: "1.1rem",
+              lineHeight: 1.8,
+            }}
+            className="mb-8"
+          >
+            We can't wait to celebrate with you at our chosen venue. Click below
+            for directions.
           </p>
 
           <a

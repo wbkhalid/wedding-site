@@ -1,6 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
-
 import { Envelope } from "./components/Envelope";
 import { MusicControl } from "./components/MusicControl";
 import { HeroSection } from "./components/HeroSection";
@@ -105,7 +104,7 @@ export default function App() {
 
           <HeroSection />
           <DuaSection />
-          <Gallery />
+          {/* <Gallery /> */}
           <CountdownTimer />
           <CoupleSection />
           <EventSchedule />

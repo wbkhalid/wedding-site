@@ -48,10 +48,14 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
         </motion.p>
 
         {/* Groom name in script */}
-        <motion.h1 tabIndex={-1}
+        <motion.h1
+          tabIndex={-1}
           initial={{ opacity: 0, y: 30 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 0.3 }}
+          transition={{
+            duration: reduceMotion ? 0 : 1,
+            delay: reduceMotion ? 0 : 0.3,
+          }}
           style={{
             fontFamily: "'Great Vibes', cursive",
             color: "#3d2e1f",
@@ -65,7 +69,10 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
               className="inline-block"
               initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
               animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : 14 }}
-              transition={{ duration: reduceMotion ? 0 : 0.65, delay: reduceMotion ? 0 : 0.3 + index * 0.06 }}
+              transition={{
+                duration: reduceMotion ? 0 : 0.65,
+                delay: reduceMotion ? 0 : 0.3 + index * 0.06,
+              }}
             >
               {letter}
             </motion.span>
@@ -74,7 +81,10 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: revealed ? 1 : 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.5 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.8,
+            delay: reduceMotion ? 0 : 0.5,
+          }}
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             color: "#8b6d50",
@@ -90,16 +100,26 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: revealed ? 1 : 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.7 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.8,
+            delay: reduceMotion ? 0 : 0.7,
+          }}
           className="mt-6"
-          style={{ fontFamily: "'Cormorant Garamond', serif", color: "#8b6d50", fontSize: "1.2rem" }}
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            color: "#8b6d50",
+            fontSize: "1.2rem",
+          }}
         >
-          Son of the late Khalid Pervaiz
+          Son of Khalid Pervaiz
         </motion.p>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: revealed ? 1 : 0 }}
-          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 0.9 }}
+          transition={{
+            duration: reduceMotion ? 0 : 1,
+            delay: reduceMotion ? 0 : 0.9,
+          }}
           className="mt-12"
         >
           <p
@@ -111,7 +131,8 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
               textTransform: "uppercase",
             }}
           >
-            Mrs. Khalid Pervaiz warmly invites you to celebrate her son's Walima over lunch
+            Mrs. Khalid Pervaiz warmly invites you to celebrate her son's Walima
+            over lunch
           </p>
           <motion.div
             className="mt-6 inline-block px-8 py-3 rounded-full"
@@ -141,8 +162,15 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
           className="mt-4"
           initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
           animate={{ opacity: revealed ? 1 : 0, y: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 1.1 }}
-          style={{ fontFamily: "'Cormorant Garamond', serif", color: "#8b6d50", fontSize: "1.15rem" }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.8,
+            delay: reduceMotion ? 0 : 1.1,
+          }}
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            color: "#8b6d50",
+            fontSize: "1.15rem",
+          }}
         >
           Walima Lunch · Mehfil Event Complex
         </motion.p>
@@ -177,7 +205,9 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
               <motion.div
                 className="w-1 h-2 rounded-full"
                 style={{ background: "#a0845e" }}
-                animate={reduceMotion ? {} : { y: [0, 8, 0], opacity: [1, 0.3, 1] }}
+                animate={
+                  reduceMotion ? {} : { y: [0, 8, 0], opacity: [1, 0.3, 1] }
+                }
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>

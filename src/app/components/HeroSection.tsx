@@ -1,6 +1,7 @@
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 
-export function HeroSection() {
+export function HeroSection({ revealed = true }: { revealed?: boolean }) {
+  const reduceMotion = useReducedMotion();
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 py-20">
       {/* Decorative bg */}
@@ -8,30 +9,8 @@ export function HeroSection() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(180deg, #fdf6f0 0%, #fce4ec 30%, #fdf6f0 60%, #f5e6d8 100%)",
+            "linear-gradient(180deg, #fffaf0 0%, #fdf6f0 70%, #f5e6d8 100%)",
         }}
-      />
-
-      {/* Animated decorative circles */}
-      <motion.div
-        className="absolute top-20 left-10 w-64 h-64 rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #d4a574, transparent)" }}
-        animate={{ scale: [1, 1.2, 1], x: [0, 20, 0] }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-80 h-80 rounded-full opacity-10"
-        style={{ background: "radial-gradient(circle, #e8b4b8, transparent)" }}
-        animate={{ scale: [1.2, 1, 1.2], x: [0, -20, 0] }}
-        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Rotating ornamental ring */}
-      <motion.div
-        className="absolute w-[600px] h-[600px] sm:w-[700px] sm:h-[700px] rounded-full border opacity-[0.04]"
-        style={{ borderColor: "#c9a87c" }}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
       />
 
       <div className="relative z-10 text-center max-w-2xl mx-auto">
@@ -44,7 +23,7 @@ export function HeroSection() {
         >
           <motion.span
             style={{ color: "#c9a87c", fontSize: "36px" }}
-            animate={{ rotate: [0, 180, 360] }}
+            animate={reduceMotion ? {} : { rotate: [0, 180, 360] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="inline-block"
           >
@@ -54,117 +33,73 @@ export function HeroSection() {
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.8, delay: 0.3 }}
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             color: "#8b6d50",
             fontSize: "14px",
-            letterSpacing: "6px",
+            letterSpacing: "0",
             textTransform: "uppercase",
           }}
           className="mb-8"
         >
-          Together with their families
+          Walima Reception
         </motion.p>
 
         {/* Groom name in script */}
-        <motion.h1
+        <motion.h1 tabIndex={-1}
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.6 }}
+          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 0.3 }}
           style={{
             fontFamily: "'Great Vibes', cursive",
             color: "#3d2e1f",
-            fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
+            fontSize: "3.5rem",
             lineHeight: 1.2,
           }}
         >
-          Hamzah
+          {"Waleed".split("").map((letter, index) => (
+            <motion.span
+              key={index}
+              className="inline-block"
+              initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
+              animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : 14 }}
+              transition={{ duration: reduceMotion ? 0 : 0.65, delay: reduceMotion ? 0 : 0.3 + index * 0.06 }}
+            >
+              {letter}
+            </motion.span>
+          ))}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
+          animate={{ opacity: revealed ? 1 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.5 }}
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             color: "#8b6d50",
             fontSize: "clamp(0.8rem, 2vw, 1rem)",
-            letterSpacing: "4px",
+            letterSpacing: "0",
             textTransform: "uppercase",
           }}
           className="mt-1"
         >
-          Hassan Bodla
+          Bin Khalid
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="my-5 flex items-center justify-center gap-4"
-        >
-          <motion.div
-            className="h-px w-16"
-            style={{ background: "linear-gradient(90deg, transparent, #c9a87c)" }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 1.1, duration: 0.6 }}
-          />
-          <motion.span
-            style={{
-              fontFamily: "'Great Vibes', cursive",
-              color: "#c9a87c",
-              fontSize: "36px",
-            }}
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            &
-          </motion.span>
-          <motion.div
-            className="h-px w-16"
-            style={{ background: "linear-gradient(90deg, #c9a87c, transparent)" }}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 1.1, duration: 0.6 }}
-          />
-        </motion.div>
-
-        {/* Bride name in script */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.2 }}
-          style={{
-            fontFamily: "'Great Vibes', cursive",
-            color: "#3d2e1f",
-            fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
-            lineHeight: 1.2,
-          }}
-        >
-          Breeha
-        </motion.h1>
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            color: "#8b6d50",
-            fontSize: "clamp(0.8rem, 2vw, 1rem)",
-            letterSpacing: "4px",
-            textTransform: "uppercase",
-          }}
-          className="mt-1"
+          animate={{ opacity: revealed ? 1 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 0.7 }}
+          className="mt-6"
+          style={{ fontFamily: "'Cormorant Garamond', serif", color: "#8b6d50", fontSize: "1.2rem" }}
         >
-          Ali
+          Son of the late Khalid Pervaiz
         </motion.p>
-
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 1.8 }}
+          animate={{ opacity: revealed ? 1 : 0 }}
+          transition={{ duration: reduceMotion ? 0 : 1, delay: reduceMotion ? 0 : 0.9 }}
           className="mt-12"
         >
           <p
@@ -172,11 +107,11 @@ export function HeroSection() {
               fontFamily: "'Cormorant Garamond', serif",
               color: "#8b6d50",
               fontSize: "14px",
-              letterSpacing: "4px",
+              letterSpacing: "0",
               textTransform: "uppercase",
             }}
           >
-            Request the pleasure of your company
+            Mrs. Khalid Pervaiz warmly invites you to celebrate her son's Walima over lunch
           </p>
           <motion.div
             className="mt-6 inline-block px-8 py-3 rounded-full"
@@ -197,20 +132,30 @@ export function HeroSection() {
                 letterSpacing: "2px",
               }}
             >
-              Sunday, 5th April 2026
+              Sunday, 15 November 2026
             </p>
           </motion.div>
         </motion.div>
+
+        <motion.p
+          className="mt-4"
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 12 }}
+          animate={{ opacity: revealed ? 1 : 0, y: 0 }}
+          transition={{ duration: reduceMotion ? 0 : 0.8, delay: reduceMotion ? 0 : 1.1 }}
+          style={{ fontFamily: "'Cormorant Garamond', serif", color: "#8b6d50", fontSize: "1.15rem" }}
+        >
+          Walima Lunch · Mehfil Event Complex
+        </motion.p>
 
         {/* Scroll indicator */}
         <motion.div
           className="mt-16"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          animate={{ opacity: revealed ? 1 : 0 }}
           transition={{ delay: 2.5, duration: 1 }}
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={reduceMotion ? {} : { y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2"
           >
@@ -232,7 +177,7 @@ export function HeroSection() {
               <motion.div
                 className="w-1 h-2 rounded-full"
                 style={{ background: "#a0845e" }}
-                animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
+                animate={reduceMotion ? {} : { y: [0, 8, 0], opacity: [1, 0.3, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
             </div>

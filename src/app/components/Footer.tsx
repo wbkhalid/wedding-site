@@ -48,7 +48,7 @@ export function Footer() {
           animate={{ opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 4, repeat: Infinity }}
         >
-          Hamzah & Breeha
+          Waleed Bin Khalid
         </motion.p>
 
         <div className="flex items-center justify-center gap-4 mt-4 mb-6">
@@ -62,10 +62,10 @@ export function Footer() {
             fontFamily: "'Playfair Display', serif",
             color: "#e8d5b0",
             fontSize: "16px",
-            letterSpacing: "6px",
+            letterSpacing: "0",
           }}
         >
-          5 · APRIL · 2026
+          15 NOVEMBER 2026
         </p>
 
         <motion.div
@@ -85,19 +85,7 @@ export function Footer() {
             fontStyle: "italic",
           }}
         >
-          "And they lived happily ever after..."
-        </p>
-
-        <p
-          className="mt-6"
-          style={{
-            fontFamily: "'Lato', sans-serif",
-            color: "#e8d5b0",
-            fontSize: "11px",
-            letterSpacing: "2px",
-          }}
-        >
-          MADE WITH ♥
+          Walima Celebration | Lunch
         </p>
       </motion.div>
     </footer>

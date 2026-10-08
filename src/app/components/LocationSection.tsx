@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { MapPin, ExternalLink } from "lucide-react";
 
-const MAP_URL = "https://maps.app.goo.gl/18VoqZZRUEVZPPGt8?g_st=aw";
+const MAP_URL = "https://www.google.com/maps/place/Mehfil+Event+Complex/@32.0749236,72.6989106,16z/data=!4m6!3m5!1s0x392177e487d46359:0xc0d5e2bc5759e616!8m2!3d32.074469!4d72.6995061!16s%2Fg%2F11vbwl0r8h?hl=en";
 
 export function LocationSection() {
   return (
@@ -48,7 +48,7 @@ export function LocationSection() {
           }}
           className="mb-2"
         >
-          Le Aura Grand, Pine Avenue Square, Lahore
+          Mehfil Event Complex
         </p>
 
         <div
@@ -75,21 +75,21 @@ export function LocationSection() {
             }}
             className="mb-8"
           >
-            We can't wait to celebrate with you at our chosen venue. Click below
-            for directions.
+            We look forward to welcoming you for Walima lunch.
+            Join us at Mehfil Event Complex.
           </p>
 
           <a
             href={MAP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-2 px-4 sm:px-8 py-3 rounded-full transition-all duration-300 hover:scale-105"
             style={{
               background: "linear-gradient(135deg, #c9a87c, #a0845e)",
               color: "#fff",
               fontFamily: "'Cormorant Garamond', serif",
               fontSize: "15px",
-              letterSpacing: "2px",
+              letterSpacing: "0",
               textTransform: "uppercase",
               textDecoration: "none",
               boxShadow: "0 4px 15px rgba(160, 132, 94, 0.3)",

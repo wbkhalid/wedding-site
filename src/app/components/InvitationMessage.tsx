@@ -26,7 +26,10 @@ export function InvitationMessage() {
             fontStyle: "italic",
           }}
         >
-          On 5th April 2026, Mrs. Mian Nizam Tariq Bodla and her beloved ones will be celebrating the wedding of her beloved son and would be delighted to have you join us in celebrating this special day. We eagerly await your presence!
+          Mrs. Khalid Pervaiz and family warmly invite you to the Walima of her
+          beloved son, Waleed Bin Khalid on Sunday, 15 November 2026, at Mehfil
+          Event Complex. Please join us for lunch and bless this occasion with
+          your presence and prayers.
         </p>
 
         {/* Decorative divider */}

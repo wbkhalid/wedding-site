@@ -32,13 +32,13 @@ export function ContactSection() {
             </div>
             <div className="text-left">
               <p style={{ fontFamily: "'Playfair Display', serif", color: "#3d2e1f", fontSize: "1.1rem" }}>
-                Mr. Ali Hassan Bodla
+                Haseeb Khalid
               </p>
             </div>
           </div>
 
           <a
-            href="tel:03464429571"
+            href="tel:+923238961933"
             className="inline-flex items-center gap-3 px-8 py-3 rounded-full transition-all duration-300 hover:scale-105 mt-2"
             style={{
               background: "linear-gradient(135deg, #c9a87c, #a0845e)",
@@ -51,7 +51,7 @@ export function ContactSection() {
             }}
           >
             <Phone size={16} />
-            0346-4429571
+            0323-8961933
           </a>
         </div>
       </motion.div>

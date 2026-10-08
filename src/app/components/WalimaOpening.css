@@ -1,0 +1,130 @@
+.royal-intro {
+  position: fixed; inset: 0; z-index: 60; overflow: hidden;
+  font-family: "Cormorant Garamond", serif; letter-spacing: 0;
+}
+.royal-scene {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 26px; padding: 50px 24px;
+  background: radial-gradient(ellipse at 50% 45%, #fdf6f0 0%, #fce4ec 62%, #f5e6d8 100%);
+  color: #3d2e1f; isolation: isolate;
+}
+.royal-scene::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+.royal-scene__frame { position: absolute; inset: 22px; border: 1px solid #c7aa6a38; pointer-events: none; }
+.royal-scene__frame::after { content: ""; position: absolute; inset: 6px; border: 1px solid #c7aa6a18; }
+.royal-intro__heading { text-align: center; position: relative; z-index: 2; }
+.royal-intro__heading p, .royal-intro__heading h1, .royal-intro__actions p { margin: 0; }
+.royal-intro__eyebrow { color: #8b6d50; font-size: 16px; margin-bottom: 16px !important; }
+.royal-intro__heading h1 { font-family: "Playfair Display", serif; font-size: 42px; font-weight: 400; line-height: 1.3; }
+.royal-intro__ornament { width: 92px; height: 40px; color: #bfa46d; margin: 14px auto 0; }
+.royal-envelope-camera { position: relative; width: min(440px, 80vw); aspect-ratio: 1.65; perspective: 1400px; z-index: 3; transform-origin: 50% 0%; margin-top: 16px; }
+.royal-envelope { position: relative; width: 100%; height: 100%; transform: rotateX(5deg); transform-style: preserve-3d; }
+.royal-envelope__back {
+  position: absolute; inset: 0; background: #d9c8a7; border-radius: 5px;
+  box-shadow: 0 30px 65px #8b6d5033, 0 8px 14px #8b6d5026, inset 0 1px 2px #fff9;
+}
+.royal-envelope__front {
+  position: absolute; inset: 0; z-index: 4; overflow: hidden; border-radius: 5px;
+  clip-path: polygon(0 0, 50% 52%, 100% 0, 100% 100%, 0 100%);
+  background: linear-gradient(32deg, #bfa984 0%, #e4d3b5 49.5%, #f1e5d0 50%, #e7d8bf 100%);
+  box-shadow: inset 0 -2px 4px #9c83534d;
+}
+.royal-envelope__front::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(148deg, transparent 49.6%, #aa906047 49.8%, #fff6 50.1%, transparent 50.4%);
+}
+.royal-envelope__monogram { position: absolute; bottom: 17px; left: 0; right: 0; text-align: center; font-family: "Great Vibes", cursive; color: #a2864f; font-size: 24px; text-shadow: 0 1px 0 #fff9; }
+.royal-envelope__floral { position: absolute; width: 112px; height: 70px; bottom: 17px; color: #ab8b4a; opacity: .6; filter: drop-shadow(0 1px 0 #fff9); }
+.royal-envelope__floral--left { left: 17px; transform: rotate(-28deg); }
+.royal-envelope__floral--right { right: 17px; transform: rotate(28deg); }
+.royal-envelope__flap { position: absolute; top: 0; left: 0; right: 0; height: 57%; transform-origin: top center; transform-style: preserve-3d; }
+.royal-envelope__flap-face, .royal-envelope__flap-reverse { position: absolute; inset: 0; clip-path: polygon(0 0, 100% 0, 50% 100%); backface-visibility: hidden; }
+.royal-envelope__flap-face { background: linear-gradient(170deg, #f4e9d6, #d8c5a4); filter: drop-shadow(0 3px 2px #755a3d4d); }
+.royal-envelope__flap-reverse { background: linear-gradient(#b9a17c, #e4d3b2); transform: rotateX(180deg); }
+.royal-seal {
+  position: absolute; z-index: 7; left: calc(50% - 34px); top: calc(51% - 28px);
+  width: 68px; height: 68px;
+}
+.royal-seal__half {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  border-radius: 46% 52% 45% 50%; border: 1px solid #c9a967;
+  background: radial-gradient(circle at 32% 24%, #efd49a, #b99351 50%, #85662f);
+  box-shadow: inset 0 1px 2px #fff9, inset 0 -3px 6px #61431366;
+  filter: drop-shadow(0 5px 4px #4f3b2945);
+}
+.royal-seal__half::before {
+  content: ""; position: absolute; inset: 7px; border: 1px solid #795b2f77;
+  border-radius: 50%; box-shadow: 0 1px 0 #f8e4b566;
+}
+.royal-seal__half span { font-family: "Great Vibes", cursive; font-size: 35px; color: #76542d; text-shadow: 0 1px 0 #f9e2b399; }
+.royal-seal__half--left { clip-path: polygon(0 0, 51% 0, 48% 25%, 54% 40%, 48% 58%, 52% 76%, 49% 100%, 0 100%); }
+.royal-seal__half--right { clip-path: polygon(51% 0, 100% 0, 100% 100%, 49% 100%, 52% 76%, 48% 58%, 54% 40%, 48% 25%); }
+.royal-card { position: absolute; z-index: 2; inset: 6% 7% 5%; border-radius: 3px; background: #fff9ed; padding: 10px; color: #3d2e1f; box-shadow: 0 4px 18px #3c2b1933, 0 0 28px #ddc69518; }
+.royal-card__border { border: 1px solid #b9995755; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px; }
+.royal-card p { margin: 0; }
+.royal-card__floral { width: 62px; height: 34px; color: #b99957; }
+.royal-card__eyebrow { font-size: 14px; color: #927740; }
+.royal-card__title { font-family: "Playfair Display", serif; font-size: 23px; padding-top: 7px; }
+.royal-card__name { font-size: 18px; padding-top: 6px; }
+.royal-card__rule { width: 38px; height: 1px; background: #b99957; margin: 8px 0; }
+.royal-card__date { font-size: 12px; }
+.royal-intro__actions { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; position: relative; z-index: 4; margin-top: 15px; }
+.royal-open-button { display: inline-flex; align-items: center; justify-content: center; gap: 26px; min-height: 50px; padding: 12px 28px; border-radius: 4px; border: 1px solid #d8be83; color: #fff; background: linear-gradient(135deg, #c9a87c, #a0845e); font-family: "Cormorant Garamond", serif; font-size: 19px; cursor: pointer; box-shadow: 0 0 20px #c9aa6920; animation: royal-button-light 4s ease-in-out infinite; }
+.royal-open-button:hover { background: linear-gradient(135deg, #b99669, #8b6d50); }
+.royal-open-button:focus-visible { outline: 2px solid #8b6d50; outline-offset: 5px; }
+.royal-open-button:disabled { cursor: default; animation: none; }
+.royal-intro__actions p { font-size: 17px; color: #5a4a3a; margin-top: 10px; }
+.royal-intro__actions > span { font-size: 15px; color: #8b6d50; }
+.royal-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.royal-particles i { position: absolute; background: #b99a62; border-radius: 50%; }
+.royal-curtains { position: absolute; inset: 0; z-index: 20; pointer-events: none; overflow: hidden; }
+.royal-curtain { position: absolute; top: 0; bottom: -2%; width: 51%; background: repeating-linear-gradient(90deg, #b99289 0%, #d9b4ab 4%, #f6dfd7 8%, #e8c4ba 11%, #c49c92 14%, #ad857d 17%, #dbb8ad 20%); box-shadow: inset 0 0 80px #8b6d5033, 15px 0 40px #8b6d5033; }
+.royal-curtain::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, #8b6d5026, transparent 30%, #8b6d501a); }
+.royal-curtain--left { left: 0; transform-origin: left center; border-right: 3px solid #ba995c; }
+.royal-curtain--right { right: 0; transform-origin: right center; border-left: 3px solid #ba995c; }
+.royal-curtain__hem { position: absolute; inset: 0 9px; border-left: 1px solid #dfc18c70; border-right: 1px solid #dfc18c70; z-index: 2; }
+.royal-curtains__valance { position: absolute; top: 0; left: 0; right: 0; height: 80px; background: repeating-linear-gradient(90deg, #c9a399, #eed2c8 5%, #c9a399 10%); border-bottom: 3px solid #c6a569; box-shadow: 0 12px 24px #8b6d5033; border-radius: 0 0 50% 50%; }
+@keyframes royal-button-light { 50% { box-shadow: 0 0 26px #c9aa6935; } }
+@media (max-width: 600px) {
+  .royal-scene { gap: 20px; padding: 65px 20px 85px; }
+  .royal-scene__frame { inset: 12px; }
+  .royal-intro__heading h1 { font-size: 30px; }
+  .royal-intro__eyebrow { font-size: 14px; margin-bottom: 12px !important; }
+  .royal-envelope-camera { width: min(360px, 84vw); margin-top: 8px; }
+  .royal-intro__ornament { height: 32px; margin-top: 10px; }
+  .royal-envelope__floral { width: 78px; height: 55px; bottom: 12px; }
+  .royal-card { padding: 7px; }
+  .royal-card__border { padding: 5px; }
+  .royal-card__floral { width: 45px; height: 24px; }
+  .royal-card__title { font-size: 18px; padding-top: 4px; }
+  .royal-card__name { font-size: 15px; }
+  .royal-card__eyebrow { font-size: 12px; }
+  .royal-card__date { font-size: 11px; }
+  .royal-card__rule { margin: 5px 0; }
+  .royal-seal { width: 56px; height: 56px; left: calc(50% - 28px); top: calc(51% - 23px); }
+  .royal-seal span:first-child { font-size: 29px; }
+}
+@media (max-height: 650px) {
+  .royal-scene { gap: 12px; padding-top: 30px; padding-bottom: 62px; }
+  .royal-intro__heading h1 { font-size: 28px; }
+  .royal-intro__ornament { display: none; }
+  .royal-envelope-camera { width: min(310px, 65vw); margin-top: 8px; }
+  .royal-intro__actions { margin-top: 6px; gap: 5px; }
+  .royal-intro__actions p { margin-top: 3px; }
+}
+@media (max-height: 450px) and (min-width: 601px) {
+  .royal-scene { flex-direction: row; gap: 28px; }
+  .royal-intro__heading { max-width: 190px; }
+  .royal-intro__eyebrow { font-size: 13px; }
+  .royal-intro__heading h1 { font-size: 24px; }
+  .royal-envelope-camera { width: 250px; flex-shrink: 0; }
+  .royal-intro__actions { max-width: 160px; }
+  .royal-open-button { gap: 10px; padding: 10px 15px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .royal-open-button { animation: none; }
+  .royal-envelope { transform: none; }
+}

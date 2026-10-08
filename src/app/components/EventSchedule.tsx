@@ -1,29 +1,27 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { Clock, Music, Utensils, Heart, Camera, Sparkles } from "lucide-react";
+import { Clock, Utensils, CalendarDays, MapPin } from "lucide-react";
 
 const events = [
   {
-    time: "6:00 PM",
-    title: "Guests Arrival",
-    description: "Welcome & seating with refreshments",
-    icon: Sparkles,
-  },
-
-  {
-    time: "6:30 PM",
-    title: "Photography",
-    description: "Capturing beautiful moments together",
-    icon: Camera,
+    time: "Sunday",
+    title: "15 November 2026",
+    description: "Walima celebration",
+    icon: CalendarDays,
   },
   {
-    time: "7:30 PM",
-    title: "Dinner",
-    description: "A grand feast to celebrate the occasion",
+    time: "Lunch",
+    title: "Walima Lunch",
+    description: "Join Waleed Bin Khalid and family for a celebratory lunch",
     icon: Utensils,
   },
+  {
+    time: "Venue",
+    title: "Mehfil Event Complex",
+    description: "We look forward to celebrating with you",
+    icon: MapPin,
+  },
 ];
-
 export function EventSchedule() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -55,7 +53,7 @@ export function EventSchedule() {
               textTransform: "uppercase",
             }}
           >
-            Wedding Day
+            Walima Day
           </p>
           <h2
             style={{
@@ -64,7 +62,7 @@ export function EventSchedule() {
               fontSize: "clamp(1.8rem, 5vw, 2.8rem)",
             }}
           >
-            Event Schedule
+            Walima Details
           </h2>
           <div className="flex items-center justify-center gap-3 mt-5">
             <div className="h-px w-16 bg-[#c9a87c]/30" />

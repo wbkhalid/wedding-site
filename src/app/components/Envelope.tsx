@@ -1,368 +1,206 @@
-import { motion, AnimatePresence } from "motion/react";
-import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import "./WalimaOpening.css";
 
+type IntroStage = "idle" | "envelope-opening" | "invitation-reveal" | "curtains-opening" | "completed";
 interface EnvelopeProps {
-  onOpen: () => void;
+  onReveal: () => void;
+  onComplete: () => void;
 }
 
-export function Envelope({ onOpen }: EnvelopeProps) {
-  const [phase, setPhase] = useState<"idle" | "breaking" | "opening" | "done">("idle");
+const ease = [0.22, 1, 0.36, 1] as const;
 
-  const handleClick = () => {
-    if (phase !== "idle") return;
-    setPhase("breaking");
-    // Wax seal breaks
-    setTimeout(() => setPhase("opening"), 800);
-    // Envelope opens and reveals
-    setTimeout(() => setPhase("done"), 2200);
-    // Fade out completely
-    setTimeout(() => onOpen(), 3000);
-  };
+function FloralOrnament({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 180 100" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.2">
+        <path d="M8 91 Q67 90 90 18 Q113 90 172 91 M90 18 Q86 3 90 2 Q94 3 90 18 M43 82 Q18 57 21 43 Q41 42 49 76 M58 68 Q35 40 44 29 Q64 37 66 55 M74 47 Q58 22 70 12 Q82 22 82 32 M137 82 Q162 57 159 43 Q139 42 131 76 M122 68 Q145 40 136 29 Q116 37 114 55 M106 47 Q122 22 110 12 Q98 22 98 32" />
+        <path d="M31 88 Q18 74 7 80 Q15 94 31 88 M149 88 Q162 74 173 80 Q165 94 149 88 M81 78 Q70 64 78 56 Q92 64 90 78 Q88 64 102 56 Q110 64 99 78" />
+        <circle cx="90" cy="84" r="4" />
+      </g>
+    </svg>
+  );
+}
 
+function GoldenParticles() {
+  return (
+    <div className="royal-particles" aria-hidden="true">
+      {Array.from({ length: 14 }, (_, i) => (
+        <motion.i
+          key={i}
+          style={{ left: `${(i * 31 + 7) % 100}%`, top: `${(i * 17 + 13) % 100}%`, width: i % 3 === 0 ? 3 : 2, height: i % 3 === 0 ? 3 : 2 }}
+          animate={{ y: [12, -25, 12], opacity: [0.1, 0.5, 0.1] }}
+          transition={{ duration: 7 + i % 5, delay: i * 0.3, repeat: Infinity, ease: "easeInOut" }}
+        />
+      ))}
+    </div>
+  );
+}
+
+function WaxSeal({ opening }: { opening: boolean }) {
+  return (
+    <div className="royal-seal">
+      {(["left", "right"] as const).map((side) => (
+        <motion.div
+          key={side}
+          className={`royal-seal__half royal-seal__half--${side}`}
+          animate={{
+            opacity: opening ? 0 : 1,
+            x: opening ? (side === "left" ? -8 : 8) : 0,
+            y: opening ? 16 : 0,
+            rotate: opening ? (side === "left" ? -12 : 12) : 0,
+          }}
+          transition={{ duration: 0.6, ease }}
+        >
+          <span>W</span>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
+function LuxuryEnvelope({ stage }: { stage: IntroStage }) {
+  const opening = stage !== "idle";
+  const reveal = stage === "invitation-reveal" || stage === "curtains-opening";
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center"
-      style={{
-        background:
-          "radial-gradient(ellipse at center, #fdf6f0 0%, #f0ddd0 40%, #e8ccb8 80%, #d4b494 100%)",
-      }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
+      className="royal-envelope-camera"
+      animate={{ scale: reveal ? 3.7 : 1, opacity: stage === "curtains-opening" ? 0 : 1, y: reveal ? 70 : 0 }}
+      transition={{ duration: reveal ? 1.65 : 0.6, delay: stage === "invitation-reveal" ? 0.6 : 0, ease }}
+      aria-hidden="true"
     >
-      {/* Animated sparkle background */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      <div className="royal-envelope">
+        <div className="royal-envelope__back" />
         <motion.div
-          key={`star-${i}`}
-          className="absolute"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            fontSize: 4 + Math.random() * 8,
-            color: "#c9a87c",
-          }}
-          animate={{
-            opacity: [0, 0.5, 0],
-            scale: [0.5, 1.2, 0.5],
-          }}
-          transition={{
-            duration: 2 + Math.random() * 3,
-            repeat: Infinity,
-            delay: Math.random() * 4,
-          }}
+          className="royal-card"
+          animate={{ y: reveal ? "-67%" : "0%", opacity: opening ? 1 : 0 }}
+          transition={{ duration: 1.25, ease }}
         >
-          ✦
+          <div className="royal-card__border">
+            <FloralOrnament className="royal-card__floral" />
+            <p className="royal-card__eyebrow">You're Cordially Invited</p>
+            <p className="royal-card__title">Walima Reception</p>
+            <p className="royal-card__name">Waleed Bin Khalid</p>
+            <div className="royal-card__rule" />
+            <p className="royal-card__date">15 November 2026</p>
+          </div>
         </motion.div>
-      ))}
-
-      {/* Falling petals */}
-      {Array.from({ length: 16 }).map((_, i) => (
-        <motion.div
-          key={`petal-${i}`}
-          className="absolute pointer-events-none"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: "-5%",
-            fontSize: `${14 + Math.random() * 14}px`,
-            opacity: 0.2 + Math.random() * 0.2,
-          }}
-          animate={{
-            y: ["0vh", "110vh"],
-            x: [0, Math.sin(i) * 60],
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration: 6 + Math.random() * 6,
-            repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: "linear",
-          }}
-        >
-          🌸
-        </motion.div>
-      ))}
-
-      <div
-        className="flex flex-col items-center gap-10 cursor-pointer"
-        onClick={handleClick}
-      >
-        {/* Main envelope container */}
-        <div
-          className="relative"
-          style={{ perspective: "1200px" }}
-        >
-          <motion.div
-            className="relative w-[300px] h-[200px] sm:w-[380px] sm:h-[250px]"
-            animate={
-              phase === "opening" || phase === "done"
-                ? { y: 30, scale: 0.95 }
-                : {}
-            }
-            transition={{ duration: 0.6 }}
-          >
-            {/* Envelope shadow */}
-            <motion.div
-              className="absolute -bottom-4 left-4 right-4 h-8 rounded-[50%]"
-              style={{
-                background: "radial-gradient(ellipse, rgba(139,109,80,0.2), transparent)",
-              }}
-              animate={
-                phase === "opening" || phase === "done"
-                  ? { opacity: 0.6, scaleX: 1.1 }
-                  : { opacity: 0.3 }
-              }
-            />
-
-            {/* Envelope body */}
-            <div
-              className="absolute inset-0 rounded-lg overflow-hidden z-0"
-              style={{
-                background: "linear-gradient(145deg, #f5ebe0 0%, #e8d5c4 100%)",
-                boxShadow:
-                  "0 20px 60px rgba(139, 109, 80, 0.3), 0 8px 20px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)",
-              }}
-            >
-              {/* Inner texture lines */}
-              <div
-                className="absolute inset-4 rounded border opacity-20"
-                style={{ borderColor: "#c9a87c" }}
-              />
-              <div
-                className="absolute inset-6 rounded border opacity-10"
-                style={{ borderColor: "#c9a87c" }}
-              />
-            </div>
-
-            {/* Bottom flap triangles (the V shape) */}
-            <div
-              className="absolute bottom-0 left-0 right-0 h-[55%] z-10"
-              style={{
-                clipPath: "polygon(0 100%, 50% 20%, 100% 100%)",
-                background: "linear-gradient(180deg, #eddcc9, #e0c9b0)",
-              }}
-            />
-
-            {/* Inner card peeking out */}
-            <AnimatePresence>
-              {(phase === "opening" || phase === "done") && (
-                <motion.div
-                  className="absolute left-[8%] right-[8%] rounded-lg flex items-center justify-center z-30"
-                  style={{
-                    height: "85%",
-                    bottom: 0,
-                    background: "linear-gradient(180deg, #fffcf8 0%, #fff5ee 100%)",
-                    boxShadow: "0 4px 20px rgba(139, 109, 80, 0.15)",
-                    border: "1px solid rgba(201, 168, 124, 0.2)",
-                  }}
-                  initial={{ y: 0 }}
-                  animate={{ y: -160 }}
-                  transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-                >
-                  <div className="text-center px-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5, duration: 0.8 }}
-                    >
-                      <p
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          color: "#c9a87c",
-                          fontSize: "10px",
-                          letterSpacing: "4px",
-                          textTransform: "uppercase",
-                        }}
-                        className="mb-2"
-                      >
-                        Wedding Invitation
-                      </p>
-                      <p
-                        style={{
-                          fontFamily: "'Playfair Display', serif",
-                          color: "#3d2e1f",
-                          fontSize: "clamp(0.9rem, 2.5vw, 1.2rem)",
-                          lineHeight: 1.4,
-                        }}
-                      >
-                        Hamzah & Breeha
-                      </p>
-                      <div
-                        className="flex items-center justify-center gap-2 mt-2"
-                      >
-                        <div className="h-px w-8 bg-[#c9a87c]/40" />
-                        <span style={{ color: "#c9a87c", fontSize: "10px" }}>✦</span>
-                        <div className="h-px w-8 bg-[#c9a87c]/40" />
-                      </div>
-                      <p
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          color: "#8b6d50",
-                          fontSize: "11px",
-                          letterSpacing: "2px",
-                          marginTop: "6px",
-                        }}
-                      >
-                        5th April 2026
-                      </p>
-                    </motion.div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Top flap (opens upward in 3D) */}
-            <motion.div
-              className="absolute top-0 left-0 right-0 origin-top z-20"
-              style={{
-                height: "55%",
-                clipPath: "polygon(0 0, 50% 80%, 100% 0)",
-                background: "linear-gradient(180deg, #eddcc9 0%, #e0c9b0 100%)",
-                transformStyle: "preserve-3d",
-                boxShadow:
-                  phase === "idle" || phase === "breaking"
-                    ? "none"
-                    : "0 10px 30px rgba(0,0,0,0.1)",
-              }}
-              animate={
-                phase === "opening" || phase === "done"
-                  ? { rotateX: -180 }
-                  : { rotateX: 0 }
-              }
-              transition={{ duration: 1, ease: [0.42, 0, 0.58, 1] }}
-            />
-
-            {/* Wax seal */}
-            <AnimatePresence>
-              {(phase === "idle" || phase === "breaking") && (
-                <motion.div
-                  className="absolute z-20"
-                  style={{
-                    bottom: "30%",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                  }}
-                  exit={{
-                    scale: [1, 1.3, 0],
-                    opacity: [1, 1, 0],
-                    rotate: [0, 15, -15],
-                  }}
-                  transition={{ duration: 0.8 }}
-                >
-                  {/* Seal glow */}
-                  <motion.div
-                    className="absolute -inset-4 rounded-full"
-                    style={{
-                      background: "radial-gradient(circle, rgba(201, 120, 124, 0.3), transparent)",
-                    }}
-                    animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0.8, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  {/* Seal body */}
-                  <motion.div
-                    className="relative w-16 h-16 rounded-full flex items-center justify-center"
-                    style={{
-                      background:
-                        "radial-gradient(circle at 35% 35%, #d4787c, #b0525a 50%, #8d3a42)",
-                      boxShadow:
-                        "0 4px 15px rgba(160, 82, 90, 0.5), inset 0 2px 4px rgba(255,255,255,0.2), inset 0 -2px 4px rgba(0,0,0,0.2)",
-                    }}
-                    animate={
-                      phase === "idle"
-                        ? { scale: [1, 1.05, 1] }
-                        : { scale: [1, 1.4, 0], rotate: [0, 20, -10] }
-                    }
-                    transition={
-                      phase === "idle"
-                        ? { duration: 2, repeat: Infinity }
-                        : { duration: 0.8 }
-                    }
-                  >
-                    {/* Seal emblem */}
-                    <span className="text-2xl" style={{ filter: "brightness(1.5)" }}>
-                      💍
-                    </span>
-                    {/* Seal rim detail */}
-                    <div
-                      className="absolute inset-1 rounded-full border"
-                      style={{ borderColor: "rgba(255,255,255,0.15)" }}
-                    />
-                    <div
-                      className="absolute inset-2.5 rounded-full border"
-                      style={{ borderColor: "rgba(255,255,255,0.08)" }}
-                    />
-                  </motion.div>
-
-                  {/* Breaking particles */}
-                  <AnimatePresence>
-                    {phase === "breaking" &&
-                      Array.from({ length: 12 }).map((_, i) => (
-                        <motion.div
-                          key={`particle-${i}`}
-                          className="absolute top-1/2 left-1/2 rounded-full"
-                          style={{
-                            width: 3 + Math.random() * 5,
-                            height: 3 + Math.random() * 5,
-                            background: `hsl(${350 + Math.random() * 20}, 60%, ${40 + Math.random() * 20}%)`,
-                          }}
-                          initial={{ x: 0, y: 0, opacity: 1 }}
-                          animate={{
-                            x: (Math.random() - 0.5) * 200,
-                            y: (Math.random() - 0.5) * 200,
-                            opacity: 0,
-                            scale: 0,
-                          }}
-                          transition={{
-                            duration: 0.6 + Math.random() * 0.4,
-                            ease: "easeOut",
-                          }}
-                        />
-                      ))}
-                  </AnimatePresence>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
+        <div className="royal-envelope__front">
+          <FloralOrnament className="royal-envelope__floral royal-envelope__floral--left" />
+          <FloralOrnament className="royal-envelope__floral royal-envelope__floral--right" />
+          <div className="royal-envelope__monogram">W</div>
         </div>
-
-        {/* Text */}
         <motion.div
-          className="text-center"
-          animate={
-            phase === "idle"
-              ? { opacity: [0.4, 1, 0.4] }
-              : phase === "done"
-              ? { opacity: 0, y: 20 }
-              : {}
-          }
-          transition={
-            phase === "idle"
-              ? { duration: 2.5, repeat: Infinity }
-              : { duration: 0.5 }
-          }
+          className="royal-envelope__flap"
+          animate={{ rotateX: opening ? -175 : 0 }}
+          transition={{ duration: 1.05, delay: opening ? 0.38 : 0, ease }}
+          style={{ zIndex: reveal ? 1 : 5 }}
         >
-          <p
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              color: "#3d2e1f",
-              fontSize: "clamp(0.9rem, 2vw, 1.1rem)",
-              letterSpacing: "2px",
-            }}
-            className="mb-1"
-          >
-            {phase === "idle" ? "You're Invited" : ""}
-          </p>
-          <p
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              color: "#8b6d50",
-              fontSize: "14px",
-              letterSpacing: "4px",
-              textTransform: "uppercase",
-            }}
-          >
-            {phase === "idle" ? "Tap to Open" : ""}
-          </p>
+          <div className="royal-envelope__flap-face" />
+          <div className="royal-envelope__flap-reverse" />
         </motion.div>
+        <WaxSeal opening={opening} />
       </div>
     </motion.div>
+  );
+}
+
+function RoyalCurtains({ open }: { open: boolean }) {
+  return (
+    <motion.div className="royal-curtains" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.55, delay: open ? 0 : 0.85 }}>
+      {(["left", "right"] as const).map((side) => (
+        <motion.div
+          key={side}
+          className={`royal-curtain royal-curtain--${side}`}
+          initial={{ x: "0%", scaleX: 1 }}
+          animate={{ x: open ? (side === "left" ? "-96%" : "96%") : "0%", scaleX: open ? 0.88 : 1 }}
+          transition={{ duration: 2.15, ease: [0.65, 0, 0.2, 1] }}
+        >
+          <div className="royal-curtain__hem" />
+        </motion.div>
+      ))}
+      <motion.div className="royal-curtains__valance" animate={{ y: open ? "-105%" : "0%" }} transition={{ duration: 1.8, ease }} />
+    </motion.div>
+  );
+}
+
+export function Envelope({ onReveal, onComplete }: EnvelopeProps) {
+  const [stage, setStage] = useState<IntroStage>("idle");
+  const [started, setStarted] = useState(false);
+  const startedRef = useRef(false);
+  const completedRef = useRef(false);
+  const reduceMotion = useReducedMotion();
+  const callbacks = useRef({ onReveal, onComplete });
+  callbacks.current = { onReveal, onComplete };
+
+  useEffect(() => {
+    const oldBody = document.body.style.overflow;
+    const oldHtml = document.documentElement.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = oldBody;
+      document.documentElement.style.overflow = oldHtml;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const timers = [
+      window.setTimeout(() => setStage("invitation-reveal"), 1300),
+      window.setTimeout(() => {
+        callbacks.current.onReveal();
+        setStage("curtains-opening");
+      }, 3000),
+      window.setTimeout(() => {
+        if (completedRef.current) return;
+        completedRef.current = true;
+        setStage("completed");
+        callbacks.current.onComplete();
+      }, 5400),
+    ];
+    return () => timers.forEach(window.clearTimeout);
+  }, [started]);
+
+  const completeImmediately = () => {
+    if (completedRef.current) return;
+    completedRef.current = true;
+    setStarted(false);
+    setStage("completed");
+    callbacks.current.onReveal();
+    callbacks.current.onComplete();
+  };
+
+  const start = () => {
+    if (startedRef.current || completedRef.current) return;
+    startedRef.current = true;
+    if (reduceMotion) { completeImmediately(); return; }
+    setStage("envelope-opening");
+    setStarted(true);
+  };
+
+  const curtainsVisible = stage === "invitation-reveal" || stage === "curtains-opening";
+  return (
+    <section className="royal-intro" data-stage={stage} aria-label="Royal Walima invitation opening">
+      <motion.div className="royal-scene" animate={{ opacity: stage === "curtains-opening" ? 0 : 1 }} transition={{ duration: 0.5 }}>
+        {!reduceMotion && <GoldenParticles />}
+        <div className="royal-scene__frame" aria-hidden="true" />
+        <motion.header className="royal-intro__heading" animate={{ opacity: started ? 0 : 1, y: started ? -16 : 0 }} transition={{ duration: 0.5 }}>
+          <p className="royal-intro__eyebrow">Waleed Bin Khalid · Walima Reception</p>
+          <h1>A Special Invitation<br />Awaits You</h1>
+          <FloralOrnament className="royal-intro__ornament" />
+        </motion.header>
+        <LuxuryEnvelope stage={stage} />
+        <motion.div className="royal-intro__actions" animate={{ opacity: started ? 0 : 1 }} transition={{ duration: 0.4 }}>
+          <button className="royal-open-button" type="button" disabled={started} onClick={start}>
+            <span>Tap to Open</span><ArrowRight size={18} aria-hidden="true" />
+          </button>
+          <p>Mrs. Khalid Pervaiz &amp; family</p>
+          <span>Sunday, 15 November 2026 · Lunch</span>
+        </motion.div>
+      </motion.div>
+      {curtainsVisible && <RoyalCurtains open={stage === "curtains-opening"} />}
+      <span role="status" className="sr-only">{started ? "Opening your Walima invitation" : ""}</span>
+    </section>
   );
 }

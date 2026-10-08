@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
-const WEDDING_DATE = new Date("2026-04-05T17:00:00").getTime();
+const WALIMA_DATE = new Date("2026-11-15T00:00:00+05:00").getTime();
 
 function FlipDigit({ value, label }: { value: number; label: string }) {
   const display = String(value).padStart(2, "0");
@@ -76,7 +76,7 @@ export function CountdownTimer() {
   const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   function getTimeLeft() {
-    const diff = Math.max(0, WEDDING_DATE - Date.now());
+    const diff = Math.max(0, WALIMA_DATE - Date.now());
     return {
       days: Math.floor(diff / (1000 * 60 * 60 * 24)),
       hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
@@ -131,7 +131,7 @@ export function CountdownTimer() {
           }}
           className="mb-3"
         >
-          Counting Down To
+          Counting Down To Walima Day
         </p>
         <h2
           style={{
@@ -141,7 +141,7 @@ export function CountdownTimer() {
           }}
           className="mb-3"
         >
-          Our Special Day
+          Walima Day
         </h2>
         <p
           style={{
@@ -152,7 +152,7 @@ export function CountdownTimer() {
           }}
           className="mb-12"
         >
-          Sunday, 5th April 2026 — 5:00 PM
+          Sunday, 15 November 2026 | Lunch
         </p>
 
         <div className="flex justify-center gap-3 sm:gap-6">

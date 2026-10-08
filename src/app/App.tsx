@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
 import { Envelope } from "./components/Envelope";
 import { MusicControl } from "./components/MusicControl";
 import { HeroSection } from "./components/HeroSection";
@@ -12,108 +11,77 @@ import { FloatingPetals } from "./components/FloatingPetals";
 import { CoupleSection } from "./components/CoupleSection";
 import { DuaSection } from "./components/DuaSection";
 import { EventSchedule } from "./components/EventSchedule";
-import { Gallery } from "./components/Gallery";
-
-const MUSIC_URLS = ["/music/wedding.mp3"];
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [introComplete, setIntroComplete] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [musicError, setMusicError] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const pageRef = useRef<HTMLElement | null>(null);
+  const audioPending = useRef(false);
 
-  // Initialize audio
-  const initAudio = useCallback(() => {
+  const toggleMusic = useCallback(async () => {
+    if (audioPending.current) return;
     if (!audioRef.current) {
-      const audio = new Audio(MUSIC_URLS[0]);
+      const audio = new Audio("/music/wedding.mp3");
       audio.loop = true;
       audio.volume = 0.3;
-      audio.preload = "auto";
-
-      audio.onerror = () => {
-        audio.src = MUSIC_URLS[1];
-      };
-
+      audio.onplaying = () => { setIsPlaying(true); setMusicError(false); };
+      audio.onpause = () => setIsPlaying(false);
+      audio.onerror = () => { setIsPlaying(false); setMusicError(true); };
       audioRef.current = audio;
     }
-    return audioRef.current;
-  }, []);
-
-  // Play audio
-  const playAudio = useCallback(async () => {
-    const audio = initAudio();
-
+    const audio = audioRef.current;
+    if (!audio.paused) { audio.pause(); return; }
+    audioPending.current = true;
     try {
       await audio.play();
-      setIsPlaying(true);
-    } catch (err) {
-      console.log("Autoplay blocked:", err);
-    }
-  }, [initAudio]);
-
-  // Envelope open
-  const handleOpen = () => {
-    setIsOpen(true);
-
-    // slight delay for better autoplay success
-    setTimeout(() => {
-      playAudio();
-    }, 100);
-  };
-
-  // Toggle music
-  const toggleMusic = useCallback(() => {
-    const audio = initAudio();
-
-    if (isPlaying) {
-      audio.pause();
+    } catch {
       setIsPlaying(false);
-    } else {
-      audio
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch((err) => console.log(err));
+      setMusicError(true);
+    } finally {
+      audioPending.current = false;
     }
-  }, [isPlaying, initAudio]);
-
-  // Cleanup
-  useEffect(() => {
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-    };
   }, []);
+
+  useEffect(() => () => {
+    const audio = audioRef.current;
+    if (audio) {
+      audio.onplaying = null;
+      audio.onpause = null;
+      audio.onerror = null;
+      audio.pause();
+    }
+  }, []);
+
+  useEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+    if (!introComplete) page.setAttribute("inert", "");
+    else {
+      page.removeAttribute("inert");
+      page.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
+    }
+  }, [isOpen, introComplete]);
 
   return (
     <div className="min-h-screen" style={{ background: "#fdf6f0" }}>
-      <AnimatePresence mode="wait">
-        {!isOpen && <Envelope key="envelope" onOpen={handleOpen} />}
-      </AnimatePresence>
-
+      {!introComplete && <Envelope onReveal={() => setIsOpen(true)} onComplete={() => setIntroComplete(true)} />}
+      <MusicControl isPlaying={isPlaying} onToggle={toggleMusic} hasError={musicError} />
       {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
+        <main ref={pageRef} aria-hidden={!introComplete}>
           <FloatingPetals />
-
-          {/* ✅ Music Control */}
-          <MusicControl isPlaying={isPlaying} onToggle={toggleMusic} />
-
-          <HeroSection />
+          <HeroSection revealed={isOpen} />
           <DuaSection />
-          {/* <Gallery /> */}
           <CountdownTimer />
           <CoupleSection />
           <EventSchedule />
           <InvitationMessage />
           <LocationSection />
-          {/* <BlessingsWall /> */}
           <ContactSection />
           <Footer />
-        </motion.div>
+        </main>
       )}
     </div>
   );

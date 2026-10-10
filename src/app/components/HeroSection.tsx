@@ -1,9 +1,10 @@
 import { motion, useReducedMotion } from "motion/react";
+import "./HeroSection.css";
 
 export function HeroSection({ revealed = true }: { revealed?: boolean }) {
   const reduceMotion = useReducedMotion();
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 py-20">
+    <section className="invitation-hero relative overflow-hidden">
       {/* Decorative bg */}
       <div
         className="absolute inset-0"
@@ -13,7 +14,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
         }}
       />
 
-      <div className="relative z-10 text-center max-w-2xl mx-auto">
+      <div className="invitation-hero__content relative z-10 text-center max-w-2xl mx-auto">
         {/* Top ornament */}
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
@@ -88,7 +89,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             color: "#8b6d50",
-            fontSize: "clamp(0.8rem, 2vw, 1rem)",
+            fontSize: "1rem",
             letterSpacing: "0",
             textTransform: "uppercase",
           }}
@@ -120,7 +121,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
             duration: reduceMotion ? 0 : 1,
             delay: reduceMotion ? 0 : 0.9,
           }}
-          className="mt-12"
+          className="invitation-hero__details"
         >
           <p
             style={{
@@ -135,7 +136,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
             over lunch
           </p>
           <motion.div
-            className="mt-6 inline-block px-8 py-3 rounded-full"
+            className="invitation-hero__date inline-block rounded-full"
             style={{
               border: "1px solid rgba(201, 168, 124, 0.4)",
               background: "rgba(201, 168, 124, 0.08)",
@@ -149,8 +150,8 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
               style={{
                 fontFamily: "'Playfair Display', serif",
                 color: "#3d2e1f",
-                fontSize: "clamp(1.1rem, 3vw, 1.5rem)",
-                letterSpacing: "2px",
+                fontSize: "1.25rem",
+                letterSpacing: "0",
               }}
             >
               Sunday, 15 November 2026
@@ -177,7 +178,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
 
         {/* Scroll indicator */}
         <motion.div
-          className="mt-16"
+          className="invitation-hero__scroll"
           initial={{ opacity: 0 }}
           animate={{ opacity: revealed ? 1 : 0 }}
           transition={{ delay: 2.5, duration: 1 }}
@@ -192,7 +193,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
                 fontFamily: "'Cormorant Garamond', serif",
                 color: "#a0845e",
                 fontSize: "12px",
-                letterSpacing: "3px",
+                letterSpacing: "0",
                 textTransform: "uppercase",
               }}
             >

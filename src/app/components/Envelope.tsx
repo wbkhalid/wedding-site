@@ -1,10 +1,10 @@
 import { motion, useReducedMotion } from "motion/react";
-import { ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import "./WalimaOpening.css";
 
 type IntroStage = "idle" | "envelope-opening" | "invitation-reveal" | "curtains-opening" | "completed";
 interface EnvelopeProps {
+  onOpen: () => void;
   onReveal: () => void;
   onComplete: () => void;
 }
@@ -40,41 +40,48 @@ function GoldenParticles() {
 
 function WaxSeal({ opening }: { opening: boolean }) {
   return (
-    <div className="royal-seal">
+    <motion.div
+      className="royal-seal"
+      initial={false}
+      animate={{
+        opacity: opening ? [1, 1, 0] : 1,
+        scale: opening ? [1, 1.08, 0.88] : 1,
+        y: opening ? -18 : 0,
+        rotate: opening ? -8 : 0,
+      }}
+      transition={{ duration: 0.55, ease: "easeInOut" }}
+    >
       {(["left", "right"] as const).map((side) => (
-        <motion.div
-          key={side}
-          className={`royal-seal__half royal-seal__half--${side}`}
-          animate={{
-            opacity: opening ? 0 : 1,
-            x: opening ? (side === "left" ? -8 : 8) : 0,
-            y: opening ? 16 : 0,
-            rotate: opening ? (side === "left" ? -12 : 12) : 0,
-          }}
-          transition={{ duration: 0.6, ease }}
-        >
+        <div key={side} className={`royal-seal__half royal-seal__half--${side}`}>
           <span>W</span>
-        </motion.div>
+        </div>
       ))}
-    </div>
+    </motion.div>
   );
 }
-function LuxuryEnvelope({ stage }: { stage: IntroStage }) {
+function LuxuryEnvelope({ stage, onOpen, disabled }: { stage: IntroStage; onOpen: () => void; disabled: boolean }) {
+  const flapRef = useRef<HTMLDivElement>(null);
   const opening = stage !== "idle";
   const reveal = stage === "invitation-reveal" || stage === "curtains-opening";
   return (
     <motion.div
       className="royal-envelope-camera"
-      animate={{ scale: reveal ? 3.7 : 1, opacity: stage === "curtains-opening" ? 0 : 1, y: reveal ? 70 : 0 }}
-      transition={{ duration: reveal ? 1.65 : 0.6, delay: stage === "invitation-reveal" ? 0.6 : 0, ease }}
-      aria-hidden="true"
+      animate={{ opacity: stage === "curtains-opening" ? 0 : 1, y: reveal ? 48 : opening ? 8 : 0 }}
+      transition={{ duration: 0.8, ease }}
     >
-      <div className="royal-envelope">
+      <button
+        className="royal-envelope"
+        type="button"
+        onClick={onOpen}
+        disabled={disabled}
+        aria-label="Open the Walima invitation envelope"
+      >
         <div className="royal-envelope__back" />
         <motion.div
           className="royal-card"
-          animate={{ y: reveal ? "-67%" : "0%", opacity: opening ? 1 : 0 }}
-          transition={{ duration: 1.25, ease }}
+          initial={false}
+          animate={{ y: reveal ? "-106%" : "0%", scale: reveal ? 1.025 : 1 }}
+          transition={{ y: { duration: 1.65, ease: [0.33, 0, 0.2, 1] }, scale: { duration: 0.8, delay: reveal ? 0.8 : 0, ease } }}
         >
           <div className="royal-card__border">
             <FloralOrnament className="royal-card__floral" />
@@ -91,40 +98,27 @@ function LuxuryEnvelope({ stage }: { stage: IntroStage }) {
           <div className="royal-envelope__monogram">W</div>
         </div>
         <motion.div
+          ref={flapRef}
           className="royal-envelope__flap"
-          animate={{ rotateX: opening ? -175 : 0 }}
-          transition={{ duration: 1.05, delay: opening ? 0.38 : 0, ease }}
-          style={{ zIndex: reveal ? 1 : 5 }}
+          initial={false}
+          animate={{ rotateX: opening ? 174 : 0 }}
+          transition={{ duration: 1.25, delay: opening ? 0.4 : 0, ease: [0.45, 0, 0.2, 1] }}
+          onUpdate={(latest) => {
+            if (flapRef.current) {
+              flapRef.current.style.zIndex = Number(latest.rotateX) > 90 ? "1" : "5";
+            }
+          }}
         >
           <div className="royal-envelope__flap-face" />
           <div className="royal-envelope__flap-reverse" />
         </motion.div>
         <WaxSeal opening={opening} />
-      </div>
+      </button>
     </motion.div>
   );
 }
 
-function RoyalCurtains({ open }: { open: boolean }) {
-  return (
-    <motion.div className="royal-curtains" aria-hidden="true" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.55, delay: open ? 0 : 0.85 }}>
-      {(["left", "right"] as const).map((side) => (
-        <motion.div
-          key={side}
-          className={`royal-curtain royal-curtain--${side}`}
-          initial={{ x: "0%", scaleX: 1 }}
-          animate={{ x: open ? (side === "left" ? "-96%" : "96%") : "0%", scaleX: open ? 0.88 : 1 }}
-          transition={{ duration: 2.15, ease: [0.65, 0, 0.2, 1] }}
-        >
-          <div className="royal-curtain__hem" />
-        </motion.div>
-      ))}
-      <motion.div className="royal-curtains__valance" animate={{ y: open ? "-105%" : "0%" }} transition={{ duration: 1.8, ease }} />
-    </motion.div>
-  );
-}
-
-export function Envelope({ onReveal, onComplete }: EnvelopeProps) {
+export function Envelope({ onOpen, onReveal, onComplete }: EnvelopeProps) {
   const [stage, setStage] = useState<IntroStage>("idle");
   const [started, setStarted] = useState(false);
   const startedRef = useRef(false);
@@ -147,17 +141,17 @@ export function Envelope({ onReveal, onComplete }: EnvelopeProps) {
   useEffect(() => {
     if (!started) return;
     const timers = [
-      window.setTimeout(() => setStage("invitation-reveal"), 1300),
+      window.setTimeout(() => setStage("invitation-reveal"), 1750),
       window.setTimeout(() => {
         callbacks.current.onReveal();
         setStage("curtains-opening");
-      }, 3000),
+      }, 4100),
       window.setTimeout(() => {
         if (completedRef.current) return;
         completedRef.current = true;
         setStage("completed");
         callbacks.current.onComplete();
-      }, 5400),
+      }, 5000),
     ];
     return () => timers.forEach(window.clearTimeout);
   }, [started]);
@@ -174,32 +168,22 @@ export function Envelope({ onReveal, onComplete }: EnvelopeProps) {
   const start = () => {
     if (startedRef.current || completedRef.current) return;
     startedRef.current = true;
+    onOpen();
     if (reduceMotion) { completeImmediately(); return; }
     setStage("envelope-opening");
     setStarted(true);
   };
 
-  const curtainsVisible = stage === "invitation-reveal" || stage === "curtains-opening";
   return (
     <section className="royal-intro" data-stage={stage} aria-label="Royal Walima invitation opening">
-      <motion.div className="royal-scene" animate={{ opacity: stage === "curtains-opening" ? 0 : 1 }} transition={{ duration: 0.5 }}>
+      <motion.div className="royal-scene" animate={{ opacity: stage === "curtains-opening" ? 0 : 1 }} transition={{ duration: 0.8, ease }}>
         {!reduceMotion && <GoldenParticles />}
         <div className="royal-scene__frame" aria-hidden="true" />
-        <motion.header className="royal-intro__heading" animate={{ opacity: started ? 0 : 1, y: started ? -16 : 0 }} transition={{ duration: 0.5 }}>
-          <p className="royal-intro__eyebrow">Waleed Bin Khalid · Walima Reception</p>
-          <h1>A Special Invitation<br />Awaits You</h1>
-          <FloralOrnament className="royal-intro__ornament" />
-        </motion.header>
-        <LuxuryEnvelope stage={stage} />
-        <motion.div className="royal-intro__actions" animate={{ opacity: started ? 0 : 1 }} transition={{ duration: 0.4 }}>
-          <button className="royal-open-button" type="button" disabled={started} onClick={start}>
-            <span>Tap to Open</span><ArrowRight size={18} aria-hidden="true" />
-          </button>
-          <p>Mrs. Khalid Pervaiz &amp; family</p>
-          <span>Sunday, 15 November 2026 · Lunch</span>
-        </motion.div>
+        <LuxuryEnvelope stage={stage} onOpen={start} disabled={started} />
+        <motion.p className="royal-intro__hint" animate={{ opacity: started ? 0 : 1, y: started ? 12 : 0 }} transition={{ duration: 0.4 }}>
+          Click the envelope to open your invitation
+        </motion.p>
       </motion.div>
-      {curtainsVisible && <RoyalCurtains open={stage === "curtains-opening"} />}
       <span role="status" className="sr-only">{started ? "Opening your Walima invitation" : ""}</span>
     </section>
   );

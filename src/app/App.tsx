@@ -21,7 +21,7 @@ export default function App() {
   const pageRef = useRef<HTMLElement | null>(null);
   const audioPending = useRef(false);
 
-  const toggleMusic = useCallback(async () => {
+  const toggleMusic = useCallback(async (startOnly = false) => {
     if (audioPending.current) return;
     if (!audioRef.current) {
       const audio = new Audio("/music/wedding.mp3");
@@ -33,7 +33,7 @@ export default function App() {
       audioRef.current = audio;
     }
     const audio = audioRef.current;
-    if (!audio.paused) { audio.pause(); return; }
+    if (!audio.paused) { if (!startOnly) audio.pause(); return; }
     audioPending.current = true;
     try {
       await audio.play();
@@ -67,8 +67,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen" style={{ background: "#fdf6f0" }}>
-      {!introComplete && <Envelope onReveal={() => setIsOpen(true)} onComplete={() => setIntroComplete(true)} />}
-      <MusicControl isPlaying={isPlaying} onToggle={toggleMusic} hasError={musicError} />
+      {!introComplete && <Envelope onOpen={() => { void toggleMusic(true); }} onReveal={() => setIsOpen(true)} onComplete={() => setIntroComplete(true)} />}
+      <MusicControl isPlaying={isPlaying} onToggle={() => { void toggleMusic(); }} hasError={musicError} />
       {isOpen && (
         <main ref={pageRef} aria-hidden={!introComplete}>
           <FloatingPetals />

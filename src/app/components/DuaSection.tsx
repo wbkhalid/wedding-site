@@ -82,6 +82,8 @@ export function DuaSection() {
           className="mb-8"
         >
           <p
+            lang="ar"
+            dir="rtl"
             style={{
               fontFamily: "serif",
               color: "#e8d5b0",
@@ -123,6 +125,25 @@ export function DuaSection() {
         </motion.div>
 
         {/* Quranic verse */}
+        <motion.p
+          lang="ar"
+          dir="rtl"
+          className="mb-8 text-2xl sm:text-3xl"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.1, duration: 1 }}
+          style={{
+            fontFamily: "'Traditional Arabic', 'Noto Naskh Arabic', serif",
+            color: "#e8d5b0",
+            lineHeight: 2.2,
+            letterSpacing: 0,
+          }}
+        >
+          وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا
+          لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ
+          إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+        </motion.p>
+
         <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -138,7 +159,8 @@ export function DuaSection() {
         >
           "And among His Signs is this, that He created for you mates from among
           yourselves, that you may dwell in tranquility with them, and He has
-          put love and mercy between your hearts."
+          put love and mercy between your hearts. Surely in this are signs for
+          people who reflect."
         </motion.blockquote>
 
         <motion.p

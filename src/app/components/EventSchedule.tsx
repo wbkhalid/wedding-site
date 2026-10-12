@@ -1,6 +1,7 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { Clock, Utensils, CalendarDays, MapPin } from "lucide-react";
+import "./EventSchedule.css";
 
 const events = [
   {
@@ -29,7 +30,8 @@ export function EventSchedule() {
   return (
     <section
       ref={ref}
-      className="py-28 px-6"
+      className="walima-details py-28 px-6"
+      aria-labelledby="walima-details-heading"
       style={{
         background:
           "linear-gradient(180deg, #fdf6f0 0%, #f5e6d8 50%, #fdf6f0 100%)",
@@ -42,7 +44,7 @@ export function EventSchedule() {
         transition={{ duration: 0.8 }}
       >
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="walima-details-header text-center mb-16">
           <p
             className="mb-3"
             style={{
@@ -56,6 +58,7 @@ export function EventSchedule() {
             Walima Day
           </p>
           <h2
+            id="walima-details-heading"
             style={{
               fontFamily: "'Playfair Display', serif",
               color: "#3d2e1f",
@@ -72,10 +75,10 @@ export function EventSchedule() {
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div className="walima-details-timeline relative">
           {/* Vertical line */}
           <motion.div
-            className="absolute left-8 sm:left-10 top-0 bottom-0 w-px"
+            className="walima-details-line absolute left-8 sm:left-10 top-0 bottom-0 w-px"
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -94,14 +97,15 @@ export function EventSchedule() {
             return (
               <motion.div
                 key={event.title}
-                className="relative flex items-start gap-6 mb-10 last:mb-0"
+                className="walima-details-row relative flex items-start gap-6 mb-10 last:mb-0"
                 initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 + i * 0.2 }}
               >
                 {/* Timeline dot */}
                 <motion.div
-                  className="relative z-10 flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center"
+                  className="walima-details-icon relative z-10 flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center"
+                  aria-hidden="true"
                   style={{
                     background: "rgba(255,255,255,0.9)",
                     border: "2px solid rgba(201, 168, 124, 0.4)",
@@ -117,7 +121,7 @@ export function EventSchedule() {
 
                 {/* Content card */}
                 <div
-                  className="flex-1 rounded-2xl p-5 sm:p-6"
+                  className="walima-details-content min-w-0 flex-1 rounded-2xl p-5 sm:p-6"
                   style={{
                     background: "rgba(255,255,255,0.7)",
                     border: "1px solid rgba(201, 168, 124, 0.15)",

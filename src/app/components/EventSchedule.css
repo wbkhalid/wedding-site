@@ -1,0 +1,73 @@
+@media (max-width: 639px) {
+  .walima-details {
+    padding: 64px 24px;
+  }
+
+  .walima-details-header {
+    margin-bottom: 32px;
+  }
+
+  .walima-details-header > p {
+    font-size: 14px !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 8px;
+  }
+
+  .walima-details-header h2 {
+    font-size: 30px !important;
+    line-height: 1.25;
+  }
+
+  .walima-details-line {
+    left: 23px;
+    top: 24px;
+    bottom: 48px;
+  }
+
+  .walima-details-row {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .walima-details-icon {
+    width: 48px;
+    height: 48px;
+    border-width: 1px !important;
+    box-shadow: none !important;
+  }
+
+  .walima-details-content {
+    padding: 2px 0 24px;
+    background: transparent !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(139, 109, 80, 0.2) !important;
+    border-radius: 0;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .walima-details-row:last-child .walima-details-content {
+    padding-bottom: 0;
+    border-bottom: 0 !important;
+  }
+
+  .walima-details-content > p:first-child {
+    color: #806344 !important;
+    font-size: 14px !important;
+    letter-spacing: 0 !important;
+    margin-bottom: 6px;
+  }
+
+  .walima-details-content h3 {
+    font-size: 20px !important;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    overflow-wrap: break-word;
+  }
+
+  .walima-details-content > p:last-child {
+    font-size: 17px !important;
+    line-height: 1.5;
+    color: #755b43 !important;
+  }
+}

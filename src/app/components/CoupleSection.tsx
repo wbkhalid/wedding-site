@@ -11,7 +11,7 @@ function FloatingHearts() {
         duration: 4 + Math.random() * 4,
         delay: Math.random() * 5,
       })),
-    []
+    [],
   );
 
   return (
@@ -247,7 +247,7 @@ export function CoupleSection() {
             fontStyle: "italic",
           }}
         >
-          Son of the late Khalid Pervaiz
+          Son of Khalid Pervaiz
         </p>
         <div className="flex items-center justify-center gap-3 mt-5">
           <div className="h-px w-16 bg-[#c9a87c]/30" />
@@ -262,11 +262,9 @@ export function CoupleSection() {
         <PersonCard
           name="Waleed Bin Khalid"
           role="The Groom"
-
           direction="left"
           isInView={isInView}
         />
-
       </div>
 
       {/* Bottom quote */}

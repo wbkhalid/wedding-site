@@ -104,7 +104,7 @@ function PersonCard({ name, role, direction, isInView }: PersonCardProps) {
             }}
           >
             <img
-              src="/waleed-portrait.png"
+              src="/images/pic1.png"
               alt="Waleed Bin Khalid"
               width={1122}
               height={1402}

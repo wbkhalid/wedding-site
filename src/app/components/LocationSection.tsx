@@ -75,7 +75,7 @@ export function LocationSection() {
             }}
             className="mb-8"
           >
-            We look forward to welcoming you for Walima lunch.
+            We look forward to welcoming you for the Walima reception.
             Join us at Mehfil Event Complex.
           </p>
 

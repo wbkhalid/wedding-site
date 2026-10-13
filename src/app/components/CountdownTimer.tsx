@@ -152,7 +152,7 @@ export function CountdownTimer() {
           }}
           className="mb-12"
         >
-          Sunday, 15 November 2026 | Lunch
+          Sunday, 15 November 2026
         </p>
 
         <div className="flex justify-center gap-3 sm:gap-6">

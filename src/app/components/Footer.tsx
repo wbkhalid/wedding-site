@@ -85,7 +85,7 @@ export function Footer() {
             fontStyle: "italic",
           }}
         >
-          Walima Celebration | Lunch
+          Walima Celebration
         </p>
       </motion.div>
     </footer>

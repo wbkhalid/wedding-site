@@ -11,9 +11,9 @@ const events = [
     icon: CalendarDays,
   },
   {
-    time: "Lunch",
-    title: "Walima Lunch",
-    description: "Join Waleed Bin Khalid and family for a celebratory lunch",
+    time: "Lunch time",
+    title: "2 PM",
+    description: "Join Waleed Bin Khalid and family for the Walima reception",
     icon: Utensils,
   },
   {

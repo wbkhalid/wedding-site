@@ -28,7 +28,7 @@ export function InvitationMessage() {
         >
           Mrs. Khalid Pervaiz and family warmly invite you to the Walima of her
           beloved son, Waleed Bin Khalid on Sunday, 15 November 2026, at Mehfil
-          Event Complex. Please join us for lunch and bless this occasion with
+          Event Complex. Please join us and bless this occasion with
           your presence and prayers.
         </p>
 

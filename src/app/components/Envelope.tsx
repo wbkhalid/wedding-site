@@ -89,13 +89,11 @@ function LuxuryEnvelope({ stage, onOpen, disabled }: { stage: IntroStage; onOpen
             <p className="royal-card__title">Walima Reception</p>
             <p className="royal-card__name">Waleed Bin Khalid</p>
             <div className="royal-card__rule" />
-            <p className="royal-card__date">15 November 2026</p>
           </div>
         </motion.div>
         <div className="royal-envelope__front">
           <FloralOrnament className="royal-envelope__floral royal-envelope__floral--left" />
           <FloralOrnament className="royal-envelope__floral royal-envelope__floral--right" />
-          <div className="royal-envelope__monogram">W</div>
         </div>
         <motion.div
           ref={flapRef}

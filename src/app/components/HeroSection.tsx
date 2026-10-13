@@ -133,7 +133,6 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
             }}
           >
             Mrs. Khalid Pervaiz warmly invites you to celebrate her son's Walima
-            over lunch
           </p>
           <motion.div
             className="invitation-hero__date inline-block rounded-full"
@@ -173,7 +172,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
             fontSize: "1.15rem",
           }}
         >
-          Walima Lunch · Mehfil Event Complex
+          Walima Reception · Mehfil Event Complex
         </motion.p>
 
         {/* Scroll indicator */}

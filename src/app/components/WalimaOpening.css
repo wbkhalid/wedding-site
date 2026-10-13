@@ -49,14 +49,14 @@
   position: absolute; inset: 0; display: grid; place-items: center;
   border-radius: 46% 52% 45% 50%; border: 1px solid #c9a967;
   background: radial-gradient(circle at 32% 24%, #efd49a, #b99351 50%, #85662f);
-  box-shadow: inset 0 1px 2px #fff9, inset 0 -3px 6px #61431366;
-  filter: drop-shadow(0 5px 4px #4f3b2945);
+  box-shadow: none;
+  filter: none;
 }
 .royal-seal__half::before {
   content: ""; position: absolute; inset: 7px; border: 1px solid #795b2f77;
-  border-radius: 50%; box-shadow: 0 1px 0 #f8e4b566;
+  border-radius: 50%; box-shadow: none;
 }
-.royal-seal__half span { font-family: "Great Vibes", cursive; font-size: 35px; color: #76542d; text-shadow: 0 1px 0 #f9e2b399; }
+.royal-seal__half span { font-family: "Great Vibes", cursive; font-size: 35px; color: #76542d; text-shadow: none; }
 .royal-seal__half--left { clip-path: polygon(0 0, 51% 0, 48% 25%, 54% 40%, 48% 58%, 52% 76%, 49% 100%, 0 100%); }
 .royal-seal__half--right { clip-path: polygon(51% 0, 100% 0, 100% 100%, 49% 100%, 52% 76%, 48% 58%, 54% 40%, 48% 25%); }
 .royal-card { position: absolute; z-index: 2; inset: 6% 7% 5%; border-radius: 3px; background: #fff9ed; padding: 10px; color: #3d2e1f; box-shadow: 0 4px 18px #3c2b1933, 0 0 28px #ddc69518; }

@@ -50,6 +50,7 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
 
         {/* Groom name in script */}
         <motion.h1
+          className="invitation-hero__name"
           tabIndex={-1}
           initial={{ opacity: 0, y: 30 }}
           animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -60,43 +61,11 @@ export function HeroSection({ revealed = true }: { revealed?: boolean }) {
           style={{
             fontFamily: "'Great Vibes', cursive",
             color: "#3d2e1f",
-            fontSize: "3.5rem",
             lineHeight: 1.2,
           }}
         >
-          {"Waleed".split("").map((letter, index) => (
-            <motion.span
-              key={index}
-              className="inline-block"
-              initial={{ opacity: 0, y: reduceMotion ? 0 : 14 }}
-              animate={{ opacity: revealed ? 1 : 0, y: revealed ? 0 : 14 }}
-              transition={{
-                duration: reduceMotion ? 0 : 0.65,
-                delay: reduceMotion ? 0 : 0.3 + index * 0.06,
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
+          Waleed Bin Khalid
         </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: revealed ? 1 : 0 }}
-          transition={{
-            duration: reduceMotion ? 0 : 0.8,
-            delay: reduceMotion ? 0 : 0.5,
-          }}
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            color: "#8b6d50",
-            fontSize: "1rem",
-            letterSpacing: "0",
-            textTransform: "uppercase",
-          }}
-          className="mt-1"
-        >
-          Bin Khalid
-        </motion.p>
 
         <motion.p
           initial={{ opacity: 0 }}

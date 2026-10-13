@@ -57,28 +57,11 @@ export function DuaSection() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        {/* Bismillah */}
-        <motion.p
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            color: "#c9a87c",
-            fontSize: "14px",
-            letterSpacing: "6px",
-            textTransform: "uppercase",
-          }}
-          className="mb-8"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.3, duration: 1 }}
-        >
-          In the Name of Allah, the Most Beneficent, the Most Merciful
-        </motion.p>
-
         {/* Arabic Text */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.6, duration: 1 }}
+          transition={{ delay: 0.3, duration: 1 }}
           className="mb-8"
         >
           <p
@@ -95,6 +78,24 @@ export function DuaSection() {
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </p>
         </motion.div>
+
+        <motion.p
+          lang="ur"
+          dir="rtl"
+          style={{
+            fontFamily: "'Traditional Arabic', 'Noto Naskh Arabic', serif",
+            color: "#c9a87c",
+            fontSize: "20px",
+            letterSpacing: 0,
+            lineHeight: 2,
+          }}
+          className="mb-8"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6, duration: 1 }}
+        >
+          اللہ کے نام سے جو نہایت مہربان، بے حد رحم فرمانے والا ہے
+        </motion.p>
 
         {/* Decorative line */}
         <motion.div
@@ -145,25 +146,28 @@ export function DuaSection() {
         </motion.p>
 
         <motion.blockquote
+          lang="ur"
+          dir="rtl"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.2, duration: 1 }}
           style={{
-            fontFamily: "'Cormorant Garamond', serif",
+            fontFamily: "'Traditional Arabic', 'Noto Naskh Arabic', serif",
             color: "#d4c4a8",
-            fontSize: "clamp(1rem, 2.5vw, 1.25rem)",
-            lineHeight: 2,
-            fontStyle: "italic",
+            fontSize: "22px",
+            lineHeight: 2.2,
           }}
           className="mb-6"
         >
-          "And among His Signs is this, that He created for you mates from among
-          yourselves, that you may dwell in tranquility with them, and He has
-          put love and mercy between your hearts. Surely in this are signs for
-          people who reflect."
+          اور اس کی نشانیوں میں سے یہ ہے کہ اس نے تمہارے لیے تم ہی میں سے
+          شریکِ حیات پیدا کیے تاکہ تم ان کے پاس سکون پاؤ، اور اس نے تمہارے
+          درمیان محبت اور رحمت رکھ دی۔ بے شک اس میں غور و فکر کرنے والوں
+          کے لیے نشانیاں ہیں۔
         </motion.blockquote>
 
         <motion.p
+          lang="ur"
+          dir="rtl"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 1.6, duration: 1 }}
@@ -171,10 +175,10 @@ export function DuaSection() {
             fontFamily: "'Cormorant Garamond', serif",
             color: "#8b7a5e",
             fontSize: "14px",
-            letterSpacing: "3px",
+            letterSpacing: 0,
           }}
         >
-          — Surah Ar-Rum (30:21)
+          سورۃ الروم، آیت ۲۱
         </motion.p>
 
         {/* Bottom ornament */}

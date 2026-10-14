@@ -26,6 +26,8 @@ export default function App() {
     if (!audioRef.current) {
       const audio = new Audio("/music/wedding.mp3");
       audio.loop = true;
+      audio.preload = "auto";
+      audio.muted = false;
       audio.volume = 0.3;
       audio.onplaying = () => { setIsPlaying(true); setMusicError(false); };
       audio.onpause = () => setIsPlaying(false);
@@ -37,23 +39,29 @@ export default function App() {
     audioPending.current = true;
     try {
       await audio.play();
-    } catch {
+    } catch (error) {
+      if (audioRef.current !== audio) return;
       setIsPlaying(false);
-      setMusicError(true);
+      setMusicError(!(error instanceof DOMException && error.name === "NotAllowedError"));
     } finally {
-      audioPending.current = false;
+      if (audioRef.current === audio) audioPending.current = false;
     }
   }, []);
 
-  useEffect(() => () => {
-    const audio = audioRef.current;
-    if (audio) {
-      audio.onplaying = null;
-      audio.onpause = null;
-      audio.onerror = null;
-      audio.pause();
-    }
-  }, []);
+  useEffect(() => {
+    void toggleMusic(true);
+    return () => {
+      const audio = audioRef.current;
+      if (audio) {
+        audio.onplaying = null;
+        audio.onpause = null;
+        audio.onerror = null;
+        audio.pause();
+      }
+      audioRef.current = null;
+      audioPending.current = false;
+    };
+  }, [toggleMusic]);
 
   useEffect(() => {
     const page = pageRef.current;

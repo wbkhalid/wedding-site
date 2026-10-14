@@ -85,7 +85,7 @@ function LuxuryEnvelope({ stage, onOpen, disabled }: { stage: IntroStage; onOpen
         >
           <div className="royal-card__border">
             <FloralOrnament className="royal-card__floral" />
-            <p className="royal-card__eyebrow">You're Cordially Invited</p>
+            <p className="royal-card__eyebrow">You are warmly welcome</p>
             <p className="royal-card__title">Walima Reception</p>
             <p className="royal-card__name">Waleed Bin Khalid</p>
             <div className="royal-card__rule" />

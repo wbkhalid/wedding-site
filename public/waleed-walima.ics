@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Waleed Bin Khalid//Walima Invitation//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:waleed-walima-20261115@wedding-invitation
+DTSTAMP:20261014T000000Z
+DTSTART:20261115T090000Z
+SUMMARY:Waleed Bin Khalid - Walima Reception
+LOCATION:Mehfil Event Complex
+DESCRIPTION:Join Waleed Bin Khalid and family for the Walima reception.
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

@@ -1,7 +1,16 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { Clock, Utensils, CalendarDays, MapPin } from "lucide-react";
+import { Clock, Utensils, CalendarDays, CalendarPlus, MapPin } from "lucide-react";
 import "./EventSchedule.css";
+
+const calendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
+  action: "TEMPLATE",
+  text: "Waleed Bin Khalid - Walima Reception",
+  dates: "20261115T140000/20261115T140000",
+  ctz: "Asia/Karachi",
+  location: "Mehfil Event Complex",
+  details: "Join Waleed Bin Khalid and family for the Walima reception on Sunday, 15 November 2026 at 2 PM (Pakistan time).",
+})}`;
 
 const events = [
   {
@@ -164,6 +173,17 @@ export function EventSchedule() {
               </motion.div>
             );
           })}
+        </div>
+        <div className="walima-calendar-action">
+          <a
+            href={calendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="walima-calendar-button"
+          >
+            <CalendarPlus size={20} aria-hidden="true" />
+            <span>Add to Calendar</span>
+          </a>
         </div>
       </motion.div>
     </section>

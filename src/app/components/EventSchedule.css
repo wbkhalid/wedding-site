@@ -1,4 +1,40 @@
+.walima-calendar-action {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.walima-calendar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 1px solid #806344;
+  border-radius: 8px;
+  background: #806344;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: background 160ms ease;
+}
+
+.walima-calendar-button:hover {
+  background: #634b34;
+}
+
+.walima-calendar-button:focus-visible {
+  outline: 2px solid #634b34;
+  outline-offset: 4px;
+}
+
 @media (max-width: 639px) {
+  .walima-calendar-button {
+    width: 100%;
+  }
+
   .walima-details {
     padding: 64px 24px;
   }

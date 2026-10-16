@@ -181,8 +181,8 @@ export function EventSchedule() {
             rel="noopener noreferrer"
             className="walima-calendar-button"
           >
-            <CalendarPlus size={20} aria-hidden="true" />
             <span>Add to Calendar</span>
+            <CalendarPlus size={16} aria-hidden="true" />
           </a>
         </div>
       </motion.div>

@@ -95,6 +95,20 @@
 .bismillah-section__continue:hover { background: #c9a87c18; }
 .bismillah-section__continue:focus-visible { outline: 2px solid #8b6d50; outline-offset: 4px; }
 .bismillah-section__continue span:last-child { font-size: 25px; }
+.bismillah-section__scroll-prompt {
+  padding: 8px 12px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.bismillah-section__scroll-prompt * { cursor: inherit; }
+.bismillah-section__scroll-prompt:focus-visible {
+  outline: 2px solid #8b6d50;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
 
 @media (max-width: 600px) {
   .bismillah-section__frame { inset: 12px; }

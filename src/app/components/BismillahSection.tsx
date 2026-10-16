@@ -63,13 +63,14 @@ export function BismillahSection({ revealed }: { revealed: boolean }) {
           <span>Continue to the invitation</span>
           <span aria-hidden="true">↓</span>
         </button> */}
-        <motion.div
+        <motion.button
           animate={reduceMotion ? {} : { y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2"
+          className="bismillah-section__scroll-prompt flex flex-col items-center gap-2"
+          type="button"
           onClick={continueToInvitation}
         >
-          <p
+          <span
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               color: "#a0845e",
@@ -79,7 +80,7 @@ export function BismillahSection({ revealed }: { revealed: boolean }) {
             }}
           >
             Scroll down or tap to view the invitation
-          </p>
+          </span>
           <div
             className="w-5 h-8 rounded-full border flex items-start justify-center pt-1.5"
             style={{ borderColor: "rgba(160, 132, 94, 0.4)" }}
@@ -93,7 +94,7 @@ export function BismillahSection({ revealed }: { revealed: boolean }) {
               transition={{ duration: 2, repeat: Infinity }}
             />
           </div>
-        </motion.div>
+        </motion.button>
       </motion.div>
     </section>
   );

@@ -2,6 +2,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import { Envelope } from "./components/Envelope";
 import { MusicControl } from "./components/MusicControl";
 import { HeroSection } from "./components/HeroSection";
+import { BismillahSection } from "./components/BismillahSection";
 import { CountdownTimer } from "./components/CountdownTimer";
 import { InvitationMessage } from "./components/InvitationMessage";
 import { LocationSection } from "./components/LocationSection";
@@ -29,20 +30,31 @@ export default function App() {
       audio.preload = "auto";
       audio.muted = false;
       audio.volume = 0.3;
-      audio.onplaying = () => { setIsPlaying(true); setMusicError(false); };
+      audio.onplaying = () => {
+        setIsPlaying(true);
+        setMusicError(false);
+      };
       audio.onpause = () => setIsPlaying(false);
-      audio.onerror = () => { setIsPlaying(false); setMusicError(true); };
+      audio.onerror = () => {
+        setIsPlaying(false);
+        setMusicError(true);
+      };
       audioRef.current = audio;
     }
     const audio = audioRef.current;
-    if (!audio.paused) { if (!startOnly) audio.pause(); return; }
+    if (!audio.paused) {
+      if (!startOnly) audio.pause();
+      return;
+    }
     audioPending.current = true;
     try {
       await audio.play();
     } catch (error) {
       if (audioRef.current !== audio) return;
       setIsPlaying(false);
-      setMusicError(!(error instanceof DOMException && error.name === "NotAllowedError"));
+      setMusicError(
+        !(error instanceof DOMException && error.name === "NotAllowedError"),
+      );
     } finally {
       if (audioRef.current === audio) audioPending.current = false;
     }
@@ -69,19 +81,36 @@ export default function App() {
     if (!introComplete) page.setAttribute("inert", "");
     else {
       page.removeAttribute("inert");
-      page.querySelector<HTMLElement>("h1")?.focus({ preventScroll: true });
+      page
+        .querySelector<HTMLElement>("#bismillah-heading")
+        ?.focus({ preventScroll: true });
     }
   }, [isOpen, introComplete]);
 
   return (
     <div className="min-h-screen" style={{ background: "#fdf6f0" }}>
-      {!introComplete && <Envelope onOpen={() => { void toggleMusic(true); }} onReveal={() => setIsOpen(true)} onComplete={() => setIntroComplete(true)} />}
-      <MusicControl isPlaying={isPlaying} onToggle={() => { void toggleMusic(); }} hasError={musicError} />
+      {!introComplete && (
+        <Envelope
+          onOpen={() => {
+            void toggleMusic(true);
+          }}
+          onReveal={() => setIsOpen(true)}
+          onComplete={() => setIntroComplete(true)}
+        />
+      )}
+      <MusicControl
+        isPlaying={isPlaying}
+        onToggle={() => {
+          void toggleMusic();
+        }}
+        hasError={musicError}
+      />
       {isOpen && (
         <main ref={pageRef} aria-hidden={!introComplete}>
           <FloatingPetals />
+          <BismillahSection revealed={introComplete} />
           <HeroSection revealed={isOpen} />
-          <DuaSection />
+          {/* <DuaSection /> */}
           <CountdownTimer />
           <CoupleSection />
           <EventSchedule />

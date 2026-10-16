@@ -1,0 +1,125 @@
+.bismillah-section {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(28px, 7svh, 76px) 28px;
+  overflow: hidden;
+  text-align: center;
+  color: #3d2e1f;
+  background: radial-gradient(ellipse at 50% 42%, #fffaf0 12%, #fdf6f0 55%, #f5e6d8 100%);
+  font-family: "Cormorant Garamond", serif;
+}
+
+.bismillah-section__frame {
+  position: absolute;
+  inset: 24px;
+  border: 1px solid #c9a87c66;
+  pointer-events: none;
+}
+
+.bismillah-section__frame::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #c9a87c26;
+}
+
+.bismillah-section__halo {
+  position: absolute;
+  z-index: -1;
+  width: min(680px, 130vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid #c9a87c1f;
+  box-shadow: 0 0 0 28px #c9a87c08, 0 0 0 70px #c9a87c06;
+  pointer-events: none;
+}
+
+.bismillah-section__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 760px;
+  gap: clamp(12px, 2.6svh, 24px);
+}
+
+.bismillah-section__content > * { margin: 0; }
+.bismillah-section__star { color: #a0845e; font-size: 30px; }
+.bismillah-section h2 {
+  font-family: "Playfair Display", serif;
+  font-size: clamp(26px, 4vw, 42px);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.bismillah-section__ornament {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: min(320px, 80%);
+  color: #a0845e;
+}
+.bismillah-section__ornament span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #c9a87c); }
+.bismillah-section__ornament span:last-child { transform: rotate(180deg); }
+.bismillah-section__ornament svg { width: 66px; height: 24px; stroke: currentColor; stroke-width: 1.2; }
+.bismillah-section__arabic {
+  width: 100%;
+  font-family: "Amiri", "Traditional Arabic", serif;
+  font-size: clamp(30px, 6vw, 60px);
+  line-height: 2;
+  letter-spacing: 0;
+}
+.bismillah-section__transliteration { color: #785b40; font-size: clamp(18px, 2.6vw, 23px); font-style: italic; }
+.bismillah-section__translation { color: #785b40; font-size: clamp(20px, 2.8vw, 25px); line-height: 1.6; }
+.bismillah-section__continue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  color: #785b40;
+  font: inherit;
+  font-size: 17px;
+  cursor: pointer;
+  transition: background 180ms ease;
+}
+.bismillah-section__continue:hover { background: #c9a87c18; }
+.bismillah-section__continue:focus-visible { outline: 2px solid #8b6d50; outline-offset: 4px; }
+.bismillah-section__continue span:last-child { font-size: 25px; }
+
+@media (max-width: 600px) {
+  .bismillah-section__frame { inset: 12px; }
+}
+@media (max-height: 650px) {
+  .bismillah-section { padding-block: 28px; }
+  .bismillah-section__content { gap: clamp(8px, 1.8svh, 12px); }
+  .bismillah-section__star { font-size: 22px; }
+  .bismillah-section h2 { font-size: 26px; line-height: 1.3; }
+  .bismillah-section__arabic { font-size: clamp(28px, 5vw, 40px); line-height: 1.8; }
+  .bismillah-section__translation { font-size: 20px; line-height: 1.4; }
+  .bismillah-section__continue { margin-top: 0; gap: 4px; }
+}
+@media (max-height: 450px) {
+  .bismillah-section { padding-block: 22px; }
+  .bismillah-section__frame { inset: 10px; }
+  .bismillah-section__content { gap: 6px; }
+  .bismillah-section__star { display: none; }
+  .bismillah-section h2 { font-size: 22px; line-height: 1.2; }
+  .bismillah-section__ornament svg { height: 14px; }
+  .bismillah-section__arabic { font-size: 28px; line-height: 1.6; }
+  .bismillah-section__transliteration { font-size: 16px; }
+  .bismillah-section__translation { font-size: 17px; line-height: 1.3; }
+  .bismillah-section__continue { flex-direction: row; gap: 10px; padding-block: 6px; font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bismillah-section__continue { transition: none; }
+}

@@ -1,16 +1,25 @@
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
-import { Clock, Utensils, CalendarDays, CalendarPlus, MapPin } from "lucide-react";
+import {
+  Clock,
+  Utensils,
+  CalendarDays,
+  CalendarPlus,
+  MapPin,
+} from "lucide-react";
 import "./EventSchedule.css";
 
-const calendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams({
-  action: "TEMPLATE",
-  text: "Waleed Bin Khalid - Walima Reception",
-  dates: "20261115T140000/20261115T140000",
-  ctz: "Asia/Karachi",
-  location: "Mehfil Event Complex",
-  details: "Join Waleed Bin Khalid and family for the Walima reception on Sunday, 15 November 2026 at 2 PM (Pakistan time).",
-})}`;
+const calendarUrl = `https://calendar.google.com/calendar/render?${new URLSearchParams(
+  {
+    action: "TEMPLATE",
+    text: "Waleed Bin Khalid - Walima Reception",
+    dates: "20261115T140000/20261115T140000",
+    ctz: "Asia/Karachi",
+    location: "Mehfil Event Complex",
+    details:
+      "Join Waleed Bin Khalid and family for the Walima reception on Sunday, 15 November 2026 at 1 PM (Pakistan time).",
+  },
+)}`;
 
 const events = [
   {
@@ -21,14 +30,14 @@ const events = [
   },
   {
     time: "Lunch time",
-    title: "2 PM",
+    title: "1 PM",
     description: "Join Waleed Bin Khalid and family for the Walima reception",
     icon: Utensils,
   },
   {
     time: "Venue",
     title: "Mehfil Event Complex",
-    description: "We look forward to celebrating with you",
+    description: "Looking forward to celebrate with you",
     icon: MapPin,
   },
 ];

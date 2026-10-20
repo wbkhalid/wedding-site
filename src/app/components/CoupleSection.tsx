@@ -217,7 +217,7 @@ export function CoupleSection() {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <p
+        {/* <p
           className="mb-3"
           style={{
             fontFamily: "'Cormorant Garamond', serif",
@@ -228,7 +228,7 @@ export function CoupleSection() {
           }}
         >
           Introducing
-        </p>
+        </p> */}
         <h2
           style={{
             fontFamily: "'Playfair Display', serif",
